@@ -620,20 +620,24 @@
             opacity: 1;
         }
 
-        /* ===== SECCIÓN PROYECTOS ===== */
+        /* ===== SECCIÓN PROYECTOS - MISMO FONDO QUE INICIO ===== */
         #proyectos {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
+            background: linear-gradient(#18192D, rgba(0, 0, 0, 0.3));
+            min-height: 100vh;
+            padding: 100px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         #proyectos h1 {
-            font-size: 2.8rem;
+            font-size: 3.5rem;
             text-align: left;
             margin-bottom: 15px;
             color: #ffffff;
             position: relative;
             width: 100%;
+            max-width: 1200px;
         }
 
         #proyectos h1::after {
@@ -651,12 +655,16 @@
             font-size: 1.1rem;
             margin-bottom: 40px;
             color: #b0b0b0;
+            width: 100%;
+            max-width: 1200px;
         }
 
         .proyectos-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
+            width: 100%;
+            max-width: 1200px;
         }
 
         .proyecto-card {
@@ -796,9 +804,9 @@
             transform: translateX(5px);
         }
 
-        /* ===== SECCIÓN HABILIDADES ===== */
+        /* ===== SECCIÓN HABILIDADES - MISMO FONDO QUE SOBRE MÍ ===== */
         #habilidades {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            background: linear-gradient(rgba(0, 0, 0, 0.3), #18192D);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -1125,9 +1133,9 @@
             line-height: 1.3;
         }
 
-        /* ===== SECCIÓN CONTACTO - COMPLETAMENTE REDISEÑADA ===== */
+        /* ===== SECCIÓN CONTACTO - MISMO FONDO QUE INICIO ===== */
         #contacto {
-            background: linear-gradient(rgba(9, 9, 17, 0.9), rgba(9, 9, 17, 0.95));
+            background: linear-gradient(#18192D, rgba(0, 0, 0, 0.3));
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -1551,6 +1559,8 @@
         @media (max-width: 1024px) {
             .proyectos-container {
                 grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                margin: 0 auto;
             }
             
             /* En tablet, habilidades se mantienen 2x2 */
@@ -1567,6 +1577,8 @@
             .contacto-container {
                 grid-template-columns: 1fr;
                 gap: 30px;
+                max-width: 800px;
+                margin: 30px auto 0;
             }
             
             .info-contacto,
@@ -1613,6 +1625,8 @@
                 text-align: left;
                 margin: 0;
                 padding-top: 15px;
+                max-width: 800px;
+                margin: 0 auto;
             }
             
             .titulo-seccion::after {
@@ -1679,16 +1693,22 @@
             .proyectos-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                max-width: 600px;
+                margin: 0 auto;
             }
             
             #proyectos h1 {
                 font-size: 2.2rem;
                 text-align: left;
+                max-width: 600px;
+                margin: 0 auto 15px;
             }
             
             #proyectos > p {
                 text-align: left;
                 font-size: 1rem;
+                max-width: 600px;
+                margin: 0 auto 40px;
             }
             
             .imagen-proyecto {
@@ -1703,6 +1723,8 @@
             .habilidades-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                max-width: 600px;
+                margin: 30px auto 0;
             }
             
             .categoria-habilidad {
@@ -1716,10 +1738,14 @@
             /* Contacto en móviles */
             #contacto h1 {
                 font-size: 2.5rem;
+                max-width: 600px;
+                margin: 0 auto 15px;
             }
             
             .contacto-container {
                 gap: 25px;
+                max-width: 600px;
+                margin: 30px auto 0;
             }
             
             .info-contacto,
@@ -1762,11 +1788,15 @@
                 font-size: 2.2rem;
                 margin: 0;
                 padding-top: 10px;
+                max-width: 90%;
+                margin: 0 auto;
             }
             
             .texto-container,
             .tarjeta-perfil {
                 padding: 25px 20px;
+                max-width: 90%;
+                margin: 0 auto;
             }
             
             .tarjeta-perfil {
@@ -1795,6 +1825,19 @@
             
             #proyectos h1 {
                 font-size: 2rem;
+                max-width: 90%;
+                margin: 0 auto 15px;
+            }
+            
+            #proyectos > p {
+                max-width: 90%;
+                margin: 0 auto 30px;
+            }
+            
+            .proyectos-container {
+                max-width: 90%;
+                margin: 0 auto;
+                gap: 20px;
             }
             
             .contenido-proyecto {
@@ -1803,12 +1846,21 @@
             
             #habilidades h1 {
                 font-size: 2rem;
+                max-width: 90%;
+                margin: 0 auto 15px;
+            }
+            
+            #habilidades > p {
+                max-width: 90%;
+                margin: 0 auto 30px;
             }
             
             /* En móviles pequeños, habilidades se mantienen en 1 columna */
             .habilidades-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                max-width: 90%;
+                margin: 20px auto 0;
             }
             
             .categoria-habilidad {
@@ -1853,11 +1905,20 @@
             /* Contacto en móviles pequeños */
             #contacto h1 {
                 font-size: 2rem;
+                max-width: 90%;
+                margin: 0 auto 15px;
             }
             
             #contacto > p {
                 font-size: 1rem;
                 margin-bottom: 30px;
+                max-width: 90%;
+                margin: 0 auto 30px;
+            }
+            
+            .contacto-container {
+                max-width: 90%;
+                margin: 20px auto 0;
             }
             
             .info-contacto,
@@ -1909,6 +1970,11 @@
             .card {
                 padding: 22px 24px;
                 font-size: 15px;
+            }
+            
+            .proyectos-container {
+                max-width: 90%;
+                margin: 0 auto;
             }
             
             /* En móviles medianos, habilidades blandas se mantienen en 2 columnas */
@@ -2066,7 +2132,7 @@
             <!-- Proyecto 1 - Rediseño GAD Zumbahua -->
             <div class="proyecto-card">
                 <div class="imagen-proyecto">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1115&q=80" alt="Rediseño GAD Zumbahua">
+                    <img src="Imagenes/Zumbahua.png" alt="Rediseño GAD Zumbahua">
                     <div class="overlay">
                         <a href="#" class="btn-visitar">Visitar</a>
                     </div>
@@ -2086,7 +2152,7 @@
             <!-- Proyecto 2 - Ilustraciones -->
             <div class="proyecto-card">
                 <div class="imagen-proyecto">
-                    <img src="IMAGENES/fondo ilustracines1.png" alt="Ilustraciones">
+                    <img src="Imagenes/Ilustracion 1.jpeg" alt="Ilustraciones">
                     <div class="overlay">
                         <a href="#" class="btn-visitar">Ver Portfolio</a>
                     </div>
@@ -2106,7 +2172,7 @@
             <!-- Proyecto 3 - Fotografía -->
             <div class="proyecto-card">
                 <div class="imagen-proyecto">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Fotografía">
+                    <img src="Imagenes/Fotografia.jpeg" alt="Fotografía">
                     <div class="overlay">
                         <a href="#" class="btn-visitar">Ver Galería</a>
                     </div>
@@ -2126,7 +2192,7 @@
             <!-- Proyecto 4 - Publicidad -->
             <div class="proyecto-card">
                 <div class="imagen-proyecto">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Publicidad">
+                    <img src="Imagenes/Campañas.jpeg" alt="Publicidad">
                     <div class="overlay">
                         <a href="#" class="btn-visitar">Ver Campañas</a>
                     </div>
@@ -2146,7 +2212,7 @@
             <!-- Proyecto 5 - Diseño 3D -->
             <div class="proyecto-card">
                 <div class="imagen-proyecto">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Diseño 3D">
+                    <img src="Imagenes/3D 2.png" alt="Diseño 3D">
                     <div class="overlay">
                         <a href="#" class="btn-visitar">Ver Proyectos</a>
                     </div>
@@ -2166,7 +2232,7 @@
             <!-- Proyecto 6 - Marcas -->
             <div class="proyecto-card">
                 <div class="imagen-proyecto">
-                    <img src="https://images.unsplash.com/photo-1567446537710-90c298b4ca74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Marcas">
+                    <img src="Imagenes/Marcas.jpeg" alt="Marcas">
                     <div class="overlay">
                         <a href="#" class="btn-visitar">Ver Portfolio</a>
                     </div>
@@ -2865,7 +2931,7 @@
             checkVisibility(); 
             setupLightEffect(); 
             initSkillBars();
-            setupContactForm();
+            setupContactForm();   
         });
         window.addEventListener('scroll', checkVisibility);
     </script>

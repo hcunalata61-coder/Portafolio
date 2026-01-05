@@ -1,1021 +1,247 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Jhonatan Cunalata</title>
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* ===== RESET Y ESTILOS GENERALES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Helvetica, Arial, sans-serif;
-            background: #090911;
-            color: #f8f8f8;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ===== MENÚ DE NAVEGACIÓN ===== */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(15, 32, 39, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(15, 32, 39, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            transition: color 0.3s ease;
-        }
-
-        .logo:hover {
-            color: #6528F7;
-        }
-
-        .logo span {
-            color: #6528F7;
-            transition: color 0.3s ease;
-        }
-
-        .logo:hover span {
-            color: #6528F7;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-item {
-            margin-left: 30px;
-            position: relative;
-        }
-
-        .nav-link {
-            color: #f8f8f8;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-            position: relative;
-            padding: 8px 0;
-            font-family: Helvetica, Arial, sans-serif;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: #6528F7;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: 0;
-            left: 0;
-            background-color: #6528F7;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        /* ===== SUBMENU DESKTOP - CENTRADO ===== */
-        .submenu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 32, 39, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
-            list-style: none;
-            min-width: 220px;
-            display: none;
-            padding: 10px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1001;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .nav-item:hover .submenu {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        .submenu li {
-            padding: 0;
-        }
-
-        .submenu-link {
-            display: block;
-            padding: 12px 25px;
-            color: #f8f8f8;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            text-align: center;
-        }
-
-        .submenu-link:hover {
-            color: #6528F7;
-            background: rgba(101, 40, 247, 0.1);
-        }
-
-        .submenu-link::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 5px;
-            height: 5px;
-            background: #6528F7;
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .submenu-link:hover::before {
-            opacity: 1;
-        }
-
-        /* ===== MENÚ MÓVIL ===== */
-        .mobile-menu-btn {
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            display: none;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu-btn:hover {
-            color: #6528F7;
-        }
-
-        /* ===== MEDIA QUERIES ===== */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 15px 20px;
-            }
-
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                right: 20px;
-                background: rgba(15, 32, 39, 0.95);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                padding: 20px;
-                border-radius: 10px;
-                gap: 20px;
-                min-width: 250px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-item {
-                margin: 0;
-                width: 100%;
-            }
-
-            .nav-link {
-                display: block;
-                padding: 10px 0;
-                font-size: 1.1rem;
-                text-align: left;
-            }
-
-            .nav-link::after {
-                display: none;
-            }
-
-            .submenu {
-                position: static;
-                background: rgba(0, 0, 0, 0.2);
-                box-shadow: none;
-                display: none;
-                padding: 0;
-                width: 100%;
-                min-width: auto;
-                border-radius: 0;
-                margin-top: 10px;
-                margin-left: 0;
-                transform: none;
-                left: 0;
-                text-align: left;
-            }
-
-            .nav-item:hover .submenu {
-                display: none;
-            }
-
-            .submenu.active {
-                display: block;
-                animation: none;
-            }
-
-            .submenu-link {
-                padding: 10px 25px;
-                font-size: 1rem;
-                text-align: left;
-            }
-
-            .submenu-link:hover {
-                padding-left: 25px;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero-content {
-                transform: translateX(-50px);
-            }
-
-            .cards-container {
-                transform: translateX(50px);
-            }
-        }
-
-        /* ===== SECCIONES GENERALES ===== */
-        .seccion {
-            min-height: 100vh;
-            padding: 100px 2rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            text-align: left;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 1s ease;
-        }
-
-        .seccion.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ===== SECCIÓN INICIO ===== */
-        #inicio {
-            background: linear-gradient(#18192D, rgba(0, 0, 0, 0.3));
-            min-height: 115vh;
-            display: flex;
-            align-items: center;
-            padding: 40px 20px;
-            padding-top: 100px;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        .hero-content {
-            flex: 1;
-            min-width: 300px;
-            max-width: 600px;
-            transform: translateX(-100px);
-            opacity: 0;
-            transition: transform 1s ease, opacity 1s ease;
-        }
-
-        .hero-content h2 {
-            font-size: clamp(18px, 3vw, 24px);
-            font-weight: 400;
-            color: #1b558f;
-            margin-bottom: 10px;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 700;
-            background: linear-gradient(90deg, #a29bfe, #fd79a8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-
-        .hero-content h3 {
-            font-size: clamp(22px, 5vw, 40px);
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #dfe6e9;
-        }
-
-        .hero-content p {
-            font-size: clamp(14px, 2.5vw, 18px);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            color: #b2bec3;
-            max-width: 600px;
-        }
-
-        .hero-content p span {
-            color: #00cec9;
-            font-weight: 500;
-        }
-
-        /* Botones */
-        .btns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .btn {
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: 0.3s ease;
-        }
-
-        .btn.primary {
-            background: transparent;
-            border: 2px solid #00cec9;
-            color: #00cec9;
-            box-shadow: 0 0 12px rgba(0, 206, 201, 0.6);
-        }
-
-        .btn.secondary {
-            background: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-        }
-
-        .btn.primary:hover,
-        .btn.secondary:hover {
-            background: #fff;
-            color: #2d3436;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
-        }
-
-        /* Tarjetas 3D */
-        .cards-container {
-            position: relative;
-            display: grid;
-            gap: 28px;
-            perspective: 1200px;
-            width: 100%;
-            max-width: 480px;
-            font-family: "Fira Code", monospace;
-            padding: 0 12px;
-            flex: 1;
-            min-width: 300px;
-            transform: translateX(100px);
-            opacity: 0;
-            transition: transform 1s ease, opacity 1s ease;
-        }
-
-        .card {
-            position: relative;
-            width: 100%;
-            padding: 26px 28px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #1e2a78, #0a0f2c);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-            transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-                        box-shadow 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
-                        filter 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-            will-change: transform;
-            user-select: none;
-            overflow: hidden;
-            font-size: clamp(12px, 3vw, 16px);
-            line-height: 1.5;
-        }
-
-        .card.first {
-            transform: rotate(-2deg) translateX(-12px) translateY(-8px);
-            z-index: 1;
-        }
-
-        .card.second {
-            transform: rotate(2deg) translateX(20px) translateY(18px);
-            z-index: 2;
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.18), transparent 45%);
-            transform: translateZ(40px);
-            pointer-events: none;
-            mix-blend-mode: soft-light;
-            transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-            opacity: 0;
-        }
-
-        .card.active {
-            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .card:hover::after {
-            opacity: 0.8;
-        }
-
-        .cursor {
-            display: inline-block;
-            margin-left: 4px;
-            width: 10px;
-            color: #00cec9;
-            animation: blink 1s steps(2, start) infinite;
-        }
-
-        /* Colores de sintaxis */
-        .comment {
-            color: #7f8c8d;
-        }
-
-        .selector {
-            color: #e056fd;
-        }
-
-        .property {
-            color: #ffffff;
-        }
-
-        .value {
-            color: #00cec9;
-        }
-
-        /* ===== ANIMACIONES ===== */
-        @keyframes blink {
-            to {
-                visibility: hidden;
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* CONTENT DEMO */
-        .content {
-            margin-top: 120px;
-            padding: 40px;
-            color: #fff;
-            text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Footer Partículas</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+body{
+    margin:0;
+    background:#05000d;
+    font-family:Helvetica, Arial, sans-serif;
+    color:#fff;
+}
+
+/* ================= FOOTER ================= */
+.footer-network{
+    position:relative;
+    padding:70px 6% 30px; /* MÁS COMPACTO */
+    background:linear-gradient(135deg,#040008,#0c0016,#020006);
+    overflow:hidden;
+}
+
+.footer-network canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+.footer-content{
+    position:relative;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:45px;
+    z-index:2;
+}
+
+/* BRAND */
+.footer-brand h3{
+    font-size:2rem;
+    font-weight:800;
+}
+.footer-brand span{color:#8b5cf6;}
+.footer-brand p{
+    margin-top:12px;
+    font-size:.9rem;
+    opacity:.85;
+    line-height:1.6;
+}
+
+/* CONTACT */
+.footer-contact{
+    margin-top:18px;
+}
+.footer-contact p{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:.9rem;
+    margin-bottom:8px;
+    opacity:.85;
+}
+.footer-contact i{
+    color:#8b5cf6;
+}
+
+/* TITLES */
+.footer-title{
+    margin-bottom:18px;
+    font-size:.95rem;
+    color:#d7c8ff;
+    letter-spacing:1px;
+}
+
+/* NAV */
+.footer-nav ul{
+    list-style:none;
+    padding:0;
+}
+.footer-nav li{margin-bottom:12px;}
+.footer-nav a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+    text-decoration:none;
+    font-size:.9rem;
+    opacity:.85;
+    transition:.3s;
+}
+.footer-nav i{
+    color:#8b5cf6;
+    width:18px;
+}
+.footer-nav a:hover{
+    opacity:1;
+    transform:translateX(6px);
+}
+
+/* SOCIAL */
+.footer-social{
+    display:flex;
+    gap:14px;
+    margin-top:18px;
+}
+.footer-social a{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.15rem;
+    color:#fff;
+    transition:.3s;
+}
+.footer-social a:hover{
+    background:#8b5cf6;
+    color:#05000d;
+}
+
+/* BOTTOM */
+.footer-bottom{
+    margin-top:45px;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.15);
+    text-align:center;
+    font-size:.8rem;
+    opacity:.6;
+    z-index:2;
+    position:relative;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .footer-network{text-align:center;}
+    .footer-nav a{justify-content:center;}
+    .footer-social{justify-content:center;}
+    .footer-contact p{justify-content:center;}
+}
+</style>
 </head>
+
 <body>
-    <!-- Menú transparente con submenú -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Porta<span>folio</span></a>
-            
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#inicio" class="nav-link active">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#sobre-mi" class="nav-link">Sobre Mí</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#proyectos" class="nav-link">Proyectos</a>
-                    <ul class="submenu">
-                        <!-- Submenú de Ilustraciones dentro de Proyectos -->
-                        <li><a href="#ilustraciones" class="submenu-link">Ilustraciones</a>
-                            <ul class="submenu" style="position: absolute; left: 100%; top: 0; display: none;">
-                                <li><a href="#ilustraciones-digitales" class="submenu-link">Ilustraciones Digitales</a></li>
-                                <li><a href="#vectoriales" class="submenu-link">Vectoriales</a></li>
-                                <li><a href="#concept-art" class="submenu-link">Concept Art</a></li>
-                                <li><a href="#personajes" class="submenu-link">Diseño de Personajes</a></li>
-                                <li><a href="#portadas" class="submenu-link">Portadas & Carteles</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#diseno-web" class="submenu-link">Diseño Web & UI/UX</a></li>
-                        <li><a href="#branding" class="submenu-link">Branding & Identidad</a></li>
-                        <li><a href="#fotografia" class="submenu-link">Fotografía & Edición</a></li>
-                        <li><a href="#modelado-3d" class="submenu-link">Modelado 3D</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#habilidades" class="nav-link">Habilidades</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contacto" class="nav-link">Contacto</a>
-                </li>
-            </ul>
-            
-            <!-- Botón del menú móvil -->
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+
+<footer class="footer-network" id="footer">
+<canvas id="particles"></canvas>
+
+<div class="footer-content">
+
+    <div class="footer-brand">
+        <h3>Porta<span>folio</span></h3>
+        <p>
+            Diseño gráfico, fotografía, marcas,
+            diseño 3D y publicidad creativa.
+        </p>
+
+        <div class="footer-contact">
+            <p><i class="fas fa-envelope"></i> contacto@tudominio.com</p>
+            <p><i class="fas fa-phone"></i> +593 99 123 4567</p>
         </div>
-    </nav>
+    </div>
 
-    <!-- Sección de inicio -->
-    <section id="inicio" class="seccion">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h2>Hey, my name is</h2>
-                <h1>Jhonatan Cunalata</h1>
-                <h3>I design creative & modern Experiences!</h3>
-                <p>
-                    Soy <span>Diseñador Gráfico y Diseñador Web</span> que ama crear soluciones visuales y digitales
-                    con un enfoque creativo, estratégico y funcional.  
-                    Me apasiona dar vida a ideas y compartir conocimiento en el mundo digital.
-                </p>
-                <div class="btns">
-                    <button class="btn primary" onclick="contact()">Contáctame</button>
-                    <button class="btn secondary" onclick="downloadCV()">Descargar CV</button>
-                </div>
-            </div>
+    <div class="footer-nav">
+        <h4 class="footer-title">Mapa</h4>
+        <ul>
+            <li><a href="#"><i class="fas fa-camera"></i> Fotografía</a></li>
+            <li><a href="#"><i class="fas fa-tags"></i> Marcas</a></li>
+            <li><a href="#"><i class="fas fa-cube"></i> Diseño 3D</a></li>
+            <li><a href="#"><i class="fas fa-bullhorn"></i> Publicidad</a></li>
+        </ul>
+    </div>
 
-            <div class="cards-container">
-                <!-- Card 1 -->
-                <div class="card first" data-tilt>
-                    <span class="comment">// My self introduction</span><br>
-                    <span class="property">Name {</span><br>
-                    &nbsp;&nbsp;<span class="property">First name:</span> <span class="value">Jhonatan;</span><br>
-                    &nbsp;&nbsp;<span class="property">Last name:</span> <span class="value">Cunalata;</span><br>
-                    <span class="property">}</span><span class="cursor">|</span>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="card second" data-tilt>
-                    <span class="selector">.What I Do {</span><br>
-                    &nbsp;&nbsp;<span class="property">Profession:</span> <span class="value">Diseñador Gráfico y Web;</span><br>
-                    &nbsp;&nbsp;<span class="property">Markup:</span> <span class="value">HTML;</span><br>
-                    &nbsp;&nbsp;<span class="property">Web:</span> <span class="value">Full-Stack;</span><br>
-                    <span class="property">}</span><span class="cursor">|</span>
-                </div>
-            </div>
+    <div>
+        <h4 class="footer-title">Redes</h4>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
         </div>
-    </section>
+    </div>
 
-    <!-- Otras secciones demo -->
-    <section id="sobre-mi" class="seccion">
-        <div class="content">
-            <h1>Sobre Mí</h1>
-            <p>Esta sería la página "Sobre Mí"</p>
-        </div>
-    </section>
+</div>
 
-    <section id="proyectos" class="seccion">
-        <div class="content">
-            <h1>Proyectos</h1>
-            <p>Esta sería la página "Proyectos"</p>
-        </div>
-    </section>
+<div class="footer-bottom">
+    © 2026 Jhonatan Cunalata — Visual Designer
+</div>
+</footer>
 
-    <section id="ilustraciones" class="seccion">
-        <div class="content">
-            <h1>Ilustraciones</h1>
-            <p>Esta sería la página principal de "Ilustraciones"</p>
-        </div>
-    </section>
+<script>
+const canvas = document.getElementById('particles');
+const footer = document.getElementById('footer');
+const ctx = canvas.getContext('2d');
 
-    <section id="ilustraciones-digitales" class="seccion">
-        <div class="content">
-            <h1>Ilustraciones Digitales</h1>
-            <p>Esta sería la página "Ilustraciones Digitales"</p>
-        </div>
-    </section>
+function resize(){
+    canvas.width = footer.offsetWidth;
+    canvas.height = footer.offsetHeight;
+}
+window.addEventListener('resize',resize);
+resize();
 
-    <section id="vectoriales" class="seccion">
-        <div class="content">
-            <h1>Ilustraciones Vectoriales</h1>
-            <p>Esta sería la página "Ilustraciones Vectoriales"</p>
-        </div>
-    </section>
+let particles = Array.from({length:120},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    vx:(Math.random()-.5)*0.6,
+    vy:(Math.random()-.5)*0.6,
+    r:Math.random()*2+1
+}));
 
-    <section id="concept-art" class="seccion">
-        <div class="content">
-            <h1>Concept Art</h1>
-            <p>Esta sería la página "Concept Art"</p>
-        </div>
-    </section>
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p,i)=>{
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>canvas.width)p.vx*=-1;
+        if(p.y<0||p.y>canvas.height)p.vy*=-1;
 
-    <section id="personajes" class="seccion">
-        <div class="content">
-            <h1>Diseño de Personajes</h1>
-            <p>Esta sería la página "Diseño de Personajes"</p>
-        </div>
-    </section>
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,255,255,.85)";
+        ctx.fill();
 
-    <section id="portadas" class="seccion">
-        <div class="content">
-            <h1>Portadas & Carteles</h1>
-            <p>Esta sería la página "Portadas & Carteles"</p>
-        </div>
-    </section>
-
-    <section id="diseno-web" class="seccion">
-        <div class="content">
-            <h1>Diseño Web & UI/UX</h1>
-            <p>Esta sería la página "Diseño Web & UI/UX"</p>
-        </div>
-    </section>
-
-    <section id="branding" class="seccion">
-        <div class="content">
-            <h1>Branding & Identidad</h1>
-            <p>Esta sería la página "Branding & Identidad"</p>
-        </div>
-    </section>
-
-    <section id="fotografia" class="seccion">
-        <div class="content">
-            <h1>Fotografía & Edición</h1>
-            <p>Esta sería la página "Fotografía & Edición"</p>
-        </div>
-    </section>
-
-    <section id="modelado-3d" class="seccion">
-        <div class="content">
-            <h1>Modelado 3D</h1>
-            <p>Esta sería la página "Modelado 3D"</p>
-        </div>
-    </section>
-
-    <section id="habilidades" class="seccion">
-        <div class="content">
-            <h1>Habilidades</h1>
-            <p>Esta sería la página "Habilidades"</p>
-        </div>
-    </section>
-
-    <section id="contacto" class="seccion">
-        <div class="content">
-            <h1>Contacto</h1>
-            <p>Esta sería la página "Contacto"</p>
-        </div>
-    </section>
-
-    <script>
-        // Efecto de cambio en el menú al hacer scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        for(let j=i+1;j<particles.length;j++){
+            let q=particles[j];
+            let dx=p.x-q.x, dy=p.y-q.y;
+            let d=Math.sqrt(dx*dx+dy*dy);
+            if(d<120){
+                ctx.beginPath();
+                ctx.moveTo(p.x,p.y);
+                ctx.lineTo(q.x,q.y);
+                ctx.strokeStyle=`rgba(139,92,246,${(1-d/120)*0.4})`;
+                ctx.stroke();
             }
-            
-            // Actualizar elemento activo según scroll
-            updateActiveLink();
-        });
-
-        // Menú móvil
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            
-            // Cambiar icono
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.style.display === 'flex') {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-        // Función para actualizar el enlace activo según la sección visible
-        function updateActiveLink() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let currentSection = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === currentSection) {
-                    link.classList.add('active');
-                }
-            });
         }
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
 
-        // Actualizar elemento activo al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            updateActiveLink();
-        });
-
-        // Cerrar menú al hacer clic en un enlace (solo móviles)
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Para enlaces del submenú en móvil
-                if (window.innerWidth <= 768 && link.classList.contains('submenu-link')) {
-                    const navItem = link.closest('.nav-item');
-                    const submenu = navItem.querySelector('.submenu');
-                    if (submenu) {
-                        submenu.classList.remove('active');
-                    }
-                }
-                
-                if (window.innerWidth <= 768) {
-                    navMenu.style.display = 'none';
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        });
-
-        // Manejar submenú en móvil (toggle)
-        document.querySelectorAll('.nav-item').forEach(item => {
-            const link = item.querySelector('.nav-link');
-            const submenu = item.querySelector('.submenu');
-            
-            if (submenu) {
-                link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        
-                        // Cerrar otros submenús
-                        document.querySelectorAll('.submenu.active').forEach(activeSubmenu => {
-                            if (activeSubmenu !== submenu) {
-                                activeSubmenu.classList.remove('active');
-                            }
-                        });
-                        
-                        // Alternar submenú actual
-                        submenu.classList.toggle('active');
-                        
-                        // No cerrar el menú principal
-                        e.stopPropagation();
-                    }
-                });
-            }
-        });
-
-        // Smooth scroll para todos los enlaces
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                
-                // No hacer smooth scroll para enlaces que abren submenú en móvil
-                if (window.innerWidth <= 768 && this.classList.contains('nav-link') && 
-                    this.parentElement.querySelector('.submenu')) {
-                    return;
-                }
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Funciones para los botones
-        function contact() {
-            // Desplazarse a la sección de contacto
-            document.getElementById('contacto').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        }
-
-        function downloadCV() {
-            window.open("cv-jhonatan-cunalata.pdf", "_blank");
-        }
-
-        // Tilt 3D con easing cubic-bezier
-        const maxTilt = 12;
-        const zLift = 30;
-
-        document.querySelectorAll('#inicio [data-tilt]').forEach(card => {
-            const enter = () => {
-                card.classList.add('active');
-                card.style.transition = `transform .7s cubic-bezier(.175,.885,.32,1.275), box-shadow .6s cubic-bezier(.175,.885,.32,1.275)`;
-                card.style.transform += ` translateZ(${zLift}px)`;
-            };
-            
-            const leave = () => {
-                card.classList.remove('active');
-                card.style.transition = `transform .7s cubic-bezier(.22,.61,.36,1), box-shadow .6s cubic-bezier(.22,.61,.36,1), filter .5s cubic-bezier(.22,.61,.36,1)`;
-                if (card.classList.contains('second')) {
-                    card.style.transform = `rotate(2deg) translateX(20px) translateY(18px)`;
-                } else {
-                    card.style.transform = `rotate(-2deg) translateX(-12px) translateY(-8px)`;
-                }
-                card.style.boxShadow = `0 18px 40px rgba(0,0,0,.45)`;
-                card.style.removeProperty('--mx');
-                card.style.removeProperty('--my');
-            };
-            
-            const move = (e) => {
-                const r = card.getBoundingClientRect();
-                const x = e.clientX - r.left;
-                const y = e.clientY - r.top;
-                const px = (x / r.width - .5) * 2;
-                const py = (y / r.height - .5) * 2;
-                const rotY = px * maxTilt;
-                const rotX = -py * maxTilt;
-                card.style.transitionTimingFunction = 'cubic-bezier(.22,.61,.36,1)';
-                card.style.transform = `${card.classList.contains('second') ?
-                    'rotate(2deg) translateX(20px) translateY(18px)' :
-                    'rotate(-2deg) translateX(-12px) translateY(-8px)'
-                } rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${zLift}px)`;
-                card.style.boxShadow = `${-px*20}px ${py*20+18}px 50px rgba(0,0,0,.55)`;
-                card.style.setProperty('--mx', `${x}px`);
-                card.style.setProperty('--my', `${y}px`);
-            };
-            
-            card.addEventListener('mouseenter', enter);
-            card.addEventListener('mousemove', move);
-            card.addEventListener('mouseleave', leave);
-        });
-        
-        // IntersectionObserver para animar todas las secciones
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add("visible");
-                    
-                    // Animación especial para la sección de inicio
-                    if (entry.target.id === 'inicio') {
-                        animateHeroElements();
-                    }
-                }
-            });
-        }, { threshold: 0.2 });
-
-        // Aplica la animación a todas las secciones
-        document.querySelectorAll(".seccion").forEach(seccion => {
-            observer.observe(seccion);
-        });
-        
-        // Animaciones de entrada para el hero-container y cards-container
-        function animateHeroElements() {
-            const heroContainer = document.querySelector('.hero-container');
-            const heroContent = document.querySelector('.hero-content');
-            const cardsContainer = document.querySelector('.cards-container');
-            
-            // Animación para el contenedor principal
-            heroContainer.style.opacity = '1';
-            
-            // Animación para el contenido hero (desde la izquierda)
-            heroContent.style.transform = 'translateX(0)';
-            heroContent.style.opacity = '1';
-            
-            // Animación para las cards (desde la derecha)
-            setTimeout(() => {
-                cardsContainer.style.transform = 'translateX(0)';
-                cardsContainer.style.opacity = '1';
-            }, 300);
-        }
-
-        // Cerrar menú al hacer clic fuera (solo móviles)
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && navMenu.style.display === 'flex') {
-                    navMenu.style.display = 'none';
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    
-                    // Cerrar todos los submenús
-                    document.querySelectorAll('.submenu.active').forEach(submenu => {
-                        submenu.classList.remove('active');
-                    });
-                }
-            }
-        });
-
-        // Funcionalidad para sub-submenú en desktop
-        document.querySelectorAll('.submenu .submenu-link').forEach(item => {
-            item.addEventListener('mouseenter', function(e) {
-                // Si este elemento tiene un sub-submenú
-                const subSubmenu = this.querySelector('.submenu');
-                if (subSubmenu) {
-                    subSubmenu.style.display = 'block';
-                }
-            });
-            
-            item.addEventListener('mouseleave', function(e) {
-                const subSubmenu = this.querySelector('.submenu');
-                if (subSubmenu) {
-                    // Solo ocultar si el mouse no está sobre el sub-submenú
-                    setTimeout(() => {
-                        if (!subSubmenu.matches(':hover')) {
-                            subSubmenu.style.display = 'none';
-                        }
-                    }, 100);
-                }
-            });
-        });
-
-        // Manejar el hover para sub-submenús
-        document.querySelectorAll('.submenu .submenu').forEach(subSubmenu => {
-            subSubmenu.addEventListener('mouseenter', function() {
-                this.style.display = 'block';
-            });
-            
-            subSubmenu.addEventListener('mouseleave', function() {
-                this.style.display = 'none';
-            });
-        });
-    </script>
 </body>
 </html>

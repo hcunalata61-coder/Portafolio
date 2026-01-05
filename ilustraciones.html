@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Helvetica, Arial, sans-serif;
+    background:#111;
+    color:#fff;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    z-index:9999;
+    background:transparent;
+    transition:.3s;
+}
+
+.navbar.scrolled{
+    background:rgba(15,32,39,.35);
+    backdrop-filter:blur(12px);
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    height:70px;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:1.8rem;
+    font-weight:700;
+}
+
+.logo span{color:#a66cff;}
+
+.nav-menu{
+    display:flex;
+    list-style:none;
+}
+
+.nav-item{margin-left:30px;}
+
+.nav-link{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.nav-link:hover{color:#a66cff;}
+
+.hamburger{
+    display:none;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+    .hamburger{display:block;}
+    .nav-menu{
+        position:fixed;
+        top:70px;
+        left:-100%;
+        width:100%;
+        flex-direction:column;
+        background:rgba(15,32,39,.95);
+        align-items:center;
+        transition:.4s;
+    }
+    .nav-menu.active{left:0;}
+    .nav-item{margin:15px 0;}
+}
+
+/* ===== INICIO ===== */
+#inicio{
+    height:100vh;
+}
+
+.team-container{
+    display:flex;
+    height:100%;
+}
+
+.card{
+    flex:1;
+    position:relative;
+    background-size:cover;
+    background-position:center;
+    transition:.5s;
+    cursor:pointer;
+}
+
+.card:nth-child(1){background-image:url("Ilustraciones/3.0p.png");}
+.card:nth-child(2){background-image:url("Ilustraciones/1.0p.png");}
+.card:nth-child(3){background-image:url("Ilustraciones/4.0p.png");}
+.card:nth-child(4){background-image:url("Ilustraciones/2.0p.png");}
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,rgba(0,0,0,.6),rgba(0,0,0,.2));
+}
+
+.team-container:hover .card{flex:.7;}
+.team-container .card:hover{flex:3;}
+
+.content{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    opacity:0;
+    transition:.4s;
+}
+
+.card:hover .content{opacity:1;}
+
+h2{font-size:36px;}
+p{font-size:14px;opacity:.85;}
+
+@media(max-width:768px){
+    .team-container{flex-direction:column;}
+}
+
+/* ===== GALERÍA ===== */
+#galeria{
+    padding:90px 6%;
+    background:linear-gradient(rgba(17,17,17,.9),rgba(17,17,17,.9)),
+    url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f");
+    background-size:cover;
+}
+
+#galeria h2{
+    font-size:3rem;
+    margin-bottom:50px;
+}
+
+.galeria-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:26px;
+}
+
+.galeria-item{
+    position:relative;
+    overflow:hidden;
+    border-radius:18px;
+    cursor:pointer;
+}
+
+.galeria-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.galeria-item:hover img{transform:scale(1.08);}
+
+.galeria-info{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:18px;
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:10000;
+}
+
+.lightbox.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.lightbox img{
+    max-width:90vw;
+    max-height:80vh;
+    border-radius:12px;
+}
+
+.close{
+    position:absolute;
+    top:25px;
+    right:35px;
+    font-size:2rem;
+    cursor:pointer;
+}
+
+/* ===== FOOTER PROFESIONAL MORADO ===== */
+.footer-pro{
+    background:linear-gradient(135deg,#3a0ca3,#5a189a,#240046);
+    padding:70px 6% 30px;
+    margin-top:80px;
+}
+
+.footer-pro-container{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:40px;
+}
+
+.footer-brand h3{
+    font-size:1.8rem;
+}
+
+.footer-brand span{color:#e0aaff;}
+
+.footer-brand p{
+    font-size:.9rem;
+    opacity:.85;
+    margin-top:10px;
+}
+
+.footer-title{
+    font-size:1rem;
+    margin-bottom:14px;
+}
+
+.footer-links ul{list-style:none;}
+
+.footer-links a{
+    color:#fff;
+    opacity:.8;
+    text-decoration:none;
+    display:block;
+    margin-bottom:8px;
+}
+
+.footer-links a:hover{
+    color:#e0aaff;
+}
+
+.footer-contact p{
+    font-size:.9rem;
+    margin-bottom:8px;
+}
+
+.footer-contact i{
+    color:#e0aaff;
+    margin-right:8px;
+}
+
+.footer-social{
+    display:flex;
+    gap:14px;
+    margin-top:12px;
+}
+
+.footer-social a{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.footer-social a:hover{
+    background:#e0aaff;
+    color:#240046;
+}
+
+.footer-bottom{
+    text-align:center;
+    margin-top:45px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.25);
+    font-size:.8rem;
+    opacity:.75;
+}
+
+@media(max-width:768px){
+    .footer-pro{text-align:center;}
+    .footer-social{justify-content:center;}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#inicio" class="logo">Porta<span>folio</span></a>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
+            <li class="nav-item"><a href="#galeria" class="nav-link">Ilustraciones</a></li>
+        </ul>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </div>
+</nav>
+
+<section id="inicio">
+    <div class="team-container">
+        <div class="card"><div class="content"><h2>Creative</h2><p>Director</p></div></div>
+        <div class="card"><div class="content"><h2>UI</h2><p>Designer</p></div></div>
+        <div class="card"><div class="content"><h2>Visual</h2><p>Artist</p></div></div>
+        <div class="card"><div class="content"><h2>Concept</h2><p>Art</p></div></div>
+    </div>
+</section>
+
+<section id="galeria">
+    <h2>Ilustraciones</h2>
+    <div class="galeria-grid">
+        <div class="galeria-item"><img src="Ilustraciones/1.0p.png"></div>
+        <div class="galeria-item"><img src="Ilustraciones/2.0p.png"></div>
+        <div class="galeria-item"><img src="Ilustraciones/3.0p.png"></div>
+        <div class="galeria-item"><img src="Ilustraciones/4.0p.png"></div>
+    </div>
+</section>
+
+<footer class="footer-pro">
+    <div class="footer-pro-container">
+
+        <div class="footer-brand">
+            <h3>Porta<span>folio</span></h3>
+            <p>Diseño visual enfocado en ilustración, narrativa gráfica y exploración creativa.</p>
+        </div>
+
+        <div class="footer-links">
+            <h4 class="footer-title">Navegación</h4>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#galeria">Ilustraciones</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4 class="footer-title">Contacto</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Ecuador</p>
+            <p><i class="fas fa-envelope"></i> contacto@email.com</p>
+
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-behance"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Jhonatan Cunalata — Todos los derechos reservados
+    </div>
+</footer>
+
+<script>
+const navbar=document.querySelector('.navbar');
+window.addEventListener('scroll',()=>{
+    navbar.classList.toggle('scrolled',window.scrollY>40);
+});
+
+const hamburger=document.querySelector('.hamburger');
+const navMenu=document.querySelector('.nav-menu');
+hamburger.onclick=()=>navMenu.classList.toggle('active');
+</script>
+
+</body>
+</html>

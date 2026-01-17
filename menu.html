@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú Base</title>
+
+<!-- ICONOS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* =====================================================
+   RESET Y BASE
+===================================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Helvetica, Arial, sans-serif;
+    background:#111;
+    color:#fff;
+    min-height:200vh; /* solo para probar scroll */
+}
+
+/* =====================================================
+   🔽 INICIO DEL MENÚ / NAVBAR
+===================================================== */
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    z-index:9999;
+    background:transparent;
+    transition:background .3s ease, backdrop-filter .3s ease;
+}
+
+.navbar.scrolled{
+    background:rgba(15,32,39,.35);
+    backdrop-filter:blur(12px);
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    height:70px;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* LOGO */
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:1.8rem;
+    font-weight:700;
+}
+.logo span{color:#6528F7;}
+
+/* MENU */
+.nav-menu{
+    display:flex;
+    list-style:none;
+}
+
+.nav-item{
+    margin-left:30px;
+    position:relative;
+}
+
+.nav-link{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.nav-link:hover{
+    color:#6528F7;
+}
+
+/* SUBMENÚ */
+.submenu{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:180px;
+    background:rgba(15,32,39,.95);
+    list-style:none;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    border-radius:6px;
+}
+
+.submenu li a{
+    display:block;
+    padding:12px;
+    color:#fff;
+    text-decoration:none;
+}
+
+.submenu li a:hover{
+    background:rgba(101,40,247,.15);
+    color:#6528F7;
+}
+
+/* HOVER DESKTOP */
+@media(min-width:769px){
+    .nav-item:hover .submenu{
+        max-height:220px;
+    }
+}
+
+/* HAMBURGER */
+.hamburger{
+    display:none;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .hamburger{display:block;}
+
+    .nav-menu{
+        position:fixed;
+        top:70px;
+        left:-100%;
+        width:100%;
+        flex-direction:column;
+        background:rgba(15,32,39,.95);
+        align-items:center;
+        transition:.4s;
+        padding:20px 0;
+    }
+
+    .nav-menu.active{left:0;}
+
+    .nav-item{
+        margin:15px 0;
+        width:100%;
+        text-align:center;
+    }
+
+    .nav-link{
+        justify-content:center;
+    }
+
+    .submenu{
+        position:static;
+        width:100%;
+        background:transparent;
+    }
+
+    .submenu li a{
+        border-top:1px solid rgba(255,255,255,.08);
+    }
+}
+/* =====================================================
+   🔼 FIN DEL MENÚ / NAVBAR
+===================================================== */
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     🔽 INICIO HTML DEL MENÚ
+===================================================== -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="#" class="logo">Porta<span>folio</span></a>
+
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Sobre mí</a></li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link submenu-toggle">
+                    Proyectos <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#">Ilustración</a></li>
+                    <li><a href="#">Fotografía</a></li>
+                    <li><a href="#">Diseño 3D</a></li>
+                    <li><a href="#">Marcas</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item"><a href="#" class="nav-link">Contacto</a></li>
+        </ul>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+
+    </div>
+</nav>
+<!-- =====================================================
+     🔼 FIN HTML DEL MENÚ
+===================================================== -->
+
+<script>
+/* =====================================================
+   🔽 JS DEL MENÚ
+===================================================== */
+const navbar = document.querySelector('.navbar');
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+/* EFECTO SCROLL */
+window.addEventListener('scroll',()=>{
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* MENU MOBILE */
+hamburger.addEventListener('click',()=>{
+    navMenu.classList.toggle('active');
+});
+
+/* SUBMENU MOBILE */
+document.querySelectorAll('.submenu-toggle').forEach(toggle=>{
+    toggle.addEventListener('click',e=>{
+        if(window.innerWidth <= 768){
+            e.preventDefault();
+            const submenu = toggle.nextElementSibling;
+            submenu.style.maxHeight
+                ? submenu.style.maxHeight = null
+                : submenu.style.maxHeight = submenu.scrollHeight + "px";
+        }
+    });
+});
+/* =====================================================
+   🔼 FIN JS DEL MENÚ
+===================================================== */
+</script>
+
+</body>
+</html>

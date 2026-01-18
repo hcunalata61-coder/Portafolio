@@ -440,7 +440,7 @@ body{
             --color-gris-oscuro: #1a1a1a;
             --color-gris-medio: #333333;
             --color-gris-claro: #f5f5f5;
-            --color-dorado: #c9a96e;
+            --color-dorado: hsl(261, 77%, 60%);
             --color-dorado-claro: #e6d7b8;
             --color-overlay: rgba(0, 0, 0, 0.3);
             --transicion: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
@@ -852,10 +852,76 @@ body{
                 font-size: 0.7rem;
             }
         }
+        /* ===== PANTALLA DE CARGA ===== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.logo-portfolio {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #7c3aed;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.portfolio-spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(124, 58, 237, 0.1);
+    border-radius: 50%;
+    border-top-color: #7c3aed;
+    margin: 0 auto 30px;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text-portfolio {
+    color: #666;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+#main-content {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+/* ===== FIN PANTALLA DE CARGA ===== */
 </style>
 </head>
 
 <body>
+     <!-- PANTALLA DE CARGA (añadir esto) -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="logo-portfolio">MP</div>
+            <div class="portfolio-spinner"></div>
+            <div class="loading-text-portfolio">Cargando portafolio</div>
+        </div>
+    </div>
+    <div id="main-content">
 <!-- =====================================================
      🔽 INICIO HTML DEL MENÚ
 ===================================================== -->
@@ -1080,7 +1146,18 @@ body{
             
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Conferencia corporativa">
+                    <img src="Fotografias/Evento1.2.jpeg" alt="Conferencia corporativa">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>TECH<br>CONFERENCE</h2>
+                    <p>Evento corporativo</p>
+                </div>
+                <div class="categoria">Evento</div>
+            </div>
+
+            <div class="item-collage evento" data-categoria="evento">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Evento1.3.jpeg" alt="Conferencia corporativa">
                 </div>
                 <div class="texto-imagen dorado">
                     <h2>TECH<br>CONFERENCE</h2>
@@ -1089,6 +1166,28 @@ body{
                 <div class="categoria">Evento</div>
             </div>
             
+            <div class="item-collage evento" data-categoria="evento">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Evento1.4.jpeg" alt="Conferencia corporativa">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>TECH<br>CONFERENCE</h2>
+                    <p>Evento corporativo</p>
+                </div>
+                <div class="categoria">Evento</div>
+            </div>
+            
+<div class="item-collage evento" data-categoria="evento">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Evento1.jpeg" alt="Conferencia corporativa">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>TECH<br>CONFERENCE</h2>
+                    <p>Evento corporativo</p>
+                </div>
+                <div class="categoria">Evento</div>
+            </div>
+
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
                     <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Vinos y bebidas">
@@ -1122,7 +1221,7 @@ body{
             <i class="fas fa-chevron-right"></i>
         </div>
     </div>
-
+</div>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script>
 const bgImages = document.querySelectorAll('.as-slider-background img');
@@ -1308,6 +1407,32 @@ document.querySelectorAll('.submenu-toggle').forEach(toggle=>{
                 }
             }
         });
+        // ===== PANTALLA DE CARGA =====
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    
+    // Ocultar después de 1.5 segundos
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+        
+        // Mostrar contenido
+        setTimeout(() => {
+            mainContent.style.opacity = '1';
+        }, 100);
+    }, 1500);
+    
+    // Permitir saltar con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && loadingScreen.style.opacity !== '0') {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+            mainContent.style.opacity = '1';
+        }
+    });
+});
+// ===== FIN PANTALLA DE CARGA =====
     </script>
 </body>
 </html>

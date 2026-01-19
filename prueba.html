@@ -440,7 +440,7 @@ body{
             --color-gris-oscuro: #1a1a1a;
             --color-gris-medio: #333333;
             --color-gris-claro: #f5f5f5;
-            --color-dorado: #c9a96e;
+            --color-dorado: hsl(261, 77%, 60%);
             --color-dorado-claro: #e6d7b8;
             --color-overlay: rgba(0, 0, 0, 0.3);
             --transicion: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
@@ -607,9 +607,9 @@ body{
             color: var(--color-blanco);
         }
         
-        /* Filtros de imagen */
+        /* Filtros de imagen - SOLO QUITAR EL DE EVENTOS */
         .item-collage.evento img {
-            filter: grayscale(100%) contrast(1.1);
+            /* QUITADO: filter: grayscale(100%) contrast(1.1); */
         }
         
         .item-collage.producto img {
@@ -664,7 +664,7 @@ body{
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.98);
-            z-index: 2000;
+            z-index: 10000; /* CAMBIADO: de 2000 a 10000 */
             justify-content: center;
             align-items: center;
             opacity: 0;
@@ -714,18 +714,26 @@ body{
         
         .cerrar-modal {
             position: absolute;
-            top: 20px;
+            top: 30px; /* CAMBIADO: de 20px a 30px */
             right: 30px;
             color: var(--color-blanco);
             font-size: 40px;
             cursor: pointer;
-            z-index: 2001;
+            z-index: 10001; /* CAMBIADO: de 2001 a 10001 */
             transition: var(--transicion);
-            opacity: 0.7;
+            opacity: 0.9;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
         }
         
         .cerrar-modal:hover {
             opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
             transform: rotate(90deg);
         }
         
@@ -736,14 +744,16 @@ body{
             color: var(--color-blanco);
             font-size: 40px;
             cursor: pointer;
-            z-index: 2001;
+            z-index: 10001; /* CAMBIADO: de 2001 a 10001 */
             transition: var(--transicion);
-            opacity: 0.5;
+            opacity: 0.7;
             width: 60px;
             height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
         }
         
         .nav-modal:hover {
@@ -796,6 +806,14 @@ body{
             
             .nav-modal {
                 font-size: 30px;
+            }
+            
+            .cerrar-modal {
+                top: 15px;
+                right: 15px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
             }
         }
         
@@ -852,31 +870,96 @@ body{
                 font-size: 0.7rem;
             }
         }
+        /* ===== PANTALLA DE CARGA ===== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.logo-portfolio {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #7c3aed;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.portfolio-spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(124, 58, 237, 0.1);
+    border-radius: 50%;
+    border-top-color: #7c3aed;
+    margin: 0 auto 30px;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text-portfolio {
+    color: #666;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+#main-content {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+/* ===== FIN PANTALLA DE CARGA ===== */
 </style>
 </head>
 
 <body>
+     <!-- PANTALLA DE CARGA (añadir esto) -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="logo-portfolio">MP</div>
+            <div class="portfolio-spinner"></div>
+            <div class="loading-text-portfolio">Cargando portafolio</div>
+        </div>
+    </div>
+    <div id="main-content">
 <!-- =====================================================
      🔽 INICIO HTML DEL MENÚ
 ===================================================== -->
 <nav class="navbar">
     <div class="nav-container">
 
-        <a href="#" class="logo">Porta<span>folio</span></a>
+        <a href="Index.html" class="logo">Porta<span>folio</span></a>
 
         <ul class="nav-menu">
-            <li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Sobre mí</a></li>
-
+            <li class="nav-item"><a href="Index.html" class="nav-link">Inicio</a></li>
+            <li class="nav-item"><a href="sobremi.html" class="nav-link">Sobre mí</a></li>
             <li class="nav-item">
                 <a href="#" class="nav-link submenu-toggle">
                     Proyectos <i class="fas fa-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="#">Ilustración</a></li>
-                    <li><a href="#">Fotografía</a></li>
-                    <li><a href="#">Diseño 3D</a></li>
-                    <li><a href="#">Marcas</a></li>
+                    <li><a href="ilustraciones.html">Ilustración</a></li>
+                    <li><a href="fotos.html">Fotografía</a></li>
+                    <li><a href="Mantenimiento.html">Diseño 3D</a></li>
+                    <li><a href="Mantenimiento.html">Marcas</a></li>
                 </ul>
             </li>
 
@@ -895,17 +978,17 @@ body{
 <div class="as-slider">
 
 <div class="as-slider-background">
-    <img src="https://images.unsplash.com/photo-1505144808419-1957a94ca61e?auto=format&fit=crop&w=1600&q=80" class="current">
-    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=80">
-    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80">
+    <img src="Fotografias/Picsart_25-11-30_16-52-34-810.jpg" class="current">
+    <img src="Fotografias/IMG_2279.JPG">
+    <img src="Fotografias/IMG_4331.JPG">
 </div>
 
 <div class="slider-container">
 
 <div class="left-column">
     <div class="left-content">
-        <h1 class="slide-title">Komodo</h1>
-        <p class="slide-description">Islas volcánicas con paisajes salvajes y dragones legendarios.</p>
+        <h1 class="slide-title">Eventos Sociales</h1>
+        <p class="slide-description">Documentamos cada momento importante con una mirada profesional, cuidando los detalles, las emociones y la esencia de cada celebración.</p>
         <button class="explore-btn">Explore</button>
     </div>
 </div>
@@ -916,22 +999,22 @@ body{
 <div class="swiper">
 <div class="swiper-wrapper">
 
-<div class="swiper-slide" data-title="Komodo" data-desc="Islas volcánicas con paisajes salvajes y dragones legendarios.">
-    <img class="slide-image" src="https://images.unsplash.com/photo-1505144808419-1957a94ca61e?auto=format&fit=crop&w=800&q=80">
+<div class="swiper-slide" data-title="Eventos" data-desc="Documentamos cada momento importante con una mirada profesional, cuidando los detalles, las emociones y la esencia de cada celebración.">
+    <img class="slide-image" src="Fotografias/Picsart_25-11-30_16-52-34-810.jpg">
     <div class="slide-overlay"></div>
-    <div class="slide-info"><strong>Komodo</strong><br>Indonesia</div>
+    <div class="slide-info"><strong>Eventos</strong><br>Sociales</div>
 </div>
 
-<div class="swiper-slide" data-title="Kerala" data-desc="Naturaleza tropical, ríos infinitos y cultura milenaria.">
-    <img class="slide-image" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80">
+<div class="swiper-slide" data-title="Productos" data-desc="Imágenes pensadas para mostrar texturas, formas y personalidad, cuidando la luz y el encuadre para que cada producto hable por sí solo.">
+    <img class="slide-image" src="Fotografias/IMG_2279.JPG">
     <div class="slide-overlay"></div>
-    <div class="slide-info"><strong>Kerala</strong><br>India</div>
+    <div class="slide-info"><strong>Fotografía</strong><br>de Eventos</div>
 </div>
 
-<div class="swiper-slide" data-title="Matterhorn" data-desc="Montañas épicas cubiertas de nieve en el corazón de Europa.">
-    <img class="slide-image" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80">
+<div class="swiper-slide" data-title="Paisajes" data-desc="Imágenes que resaltan la esencia del entorno a través de la composición y la luz natural.">
+    <img class="slide-image" src="Fotografias/Producto5.5.jpeg">
     <div class="slide-overlay"></div>
-    <div class="slide-info"><strong>Matterhorn</strong><br>Switzerland</div>
+    <div class="slide-info"><strong>Fotografía</strong><br>de Paisajes</div>
 </div>
 
 </div>
@@ -971,7 +1054,7 @@ body{
             <!-- Eventos B&N con texto superpuesto -->
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Boda en blanco y negro">
+                    <img src="Fotografias/Evento1.1.jpeg" alt="Boda en blanco y negro">
                 </div>
                 <div class="texto-imagen dorado">
                     <h2>CHANDANI<br>+<br>JAMES</h2>
@@ -982,7 +1065,7 @@ body{
             
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Productos de belleza">
+                    <img src="Fotografias/Producto5.5.jpeg" alt="Productos de belleza">
                 </div>
                 <div class="texto-imagen blanco">
                     <h2>BELLEZA<br>NATURAL</h2>
@@ -993,7 +1076,7 @@ body{
             
             <div class="item-collage evento" data-categoria="conciertos">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Concierto en blanco y negro">
+                    <img src="Fotografias/Concierto1.jpeg" alt="Concierto en blanco y negro">
                 </div>
                 <div class="texto-imagen dorado">
                     <h2>JAZZ<br>NIGHT</h2>
@@ -1081,7 +1164,18 @@ body{
             
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Conferencia corporativa">
+                    <img src="Fotografias/Evento1.2.jpeg" alt="Conferencia corporativa">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>TECH<br>CONFERENCE</h2>
+                    <p>Evento corporativo</p>
+                </div>
+                <div class="categoria">Evento</div>
+            </div>
+
+            <div class="item-collage evento" data-categoria="evento">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Evento1.3.jpeg" alt="Conferencia corporativa">
                 </div>
                 <div class="texto-imagen dorado">
                     <h2>TECH<br>CONFERENCE</h2>
@@ -1090,6 +1184,28 @@ body{
                 <div class="categoria">Evento</div>
             </div>
             
+            <div class="item-collage evento" data-categoria="evento">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Evento1.4.jpeg" alt="Conferencia corporativa">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>TECH<br>CONFERENCE</h2>
+                    <p>Evento corporativo</p>
+                </div>
+                <div class="categoria">Evento</div>
+            </div>
+            
+<div class="item-collage evento" data-categoria="evento">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Evento1.jpeg" alt="Conferencia corporativa">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>TECH<br>CONFERENCE</h2>
+                    <p>Evento corporativo</p>
+                </div>
+                <div class="categoria">Evento</div>
+            </div>
+
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
                     <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Vinos y bebidas">
@@ -1123,7 +1239,7 @@ body{
             <i class="fas fa-chevron-right"></i>
         </div>
     </div>
-
+</div>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script>
 const bgImages = document.querySelectorAll('.as-slider-background img');
@@ -1309,6 +1425,32 @@ document.querySelectorAll('.submenu-toggle').forEach(toggle=>{
                 }
             }
         });
+        // ===== PANTALLA DE CARGA =====
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    
+    // Ocultar después de 1.5 segundos
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+        
+        // Mostrar contenido
+        setTimeout(() => {
+            mainContent.style.opacity = '1';
+        }, 100);
+    }, 1500);
+    
+    // Permitir saltar con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && loadingScreen.style.opacity !== '0') {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+            mainContent.style.opacity = '1';
+        }
+    });
+});
+// ===== FIN PANTALLA DE CARGA =====
     </script>
 </body>
 </html>

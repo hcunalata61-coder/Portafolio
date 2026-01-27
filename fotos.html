@@ -927,6 +927,161 @@ body{
     transition: opacity 0.8s ease;
 }
 /* ===== FIN PANTALLA DE CARGA ===== */
+/* ================= FOOTER ================= */
+.footer-network {
+    position: relative;
+    padding: 70px 6% 30px; /* MÁS COMPACTO */
+    background: linear-gradient(135deg, #040008, #0c0016, #020006);
+    overflow: hidden;
+}
+
+.footer-network canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 45px;
+    z-index: 2;
+}
+
+/* BRAND */
+.footer-brand h3 {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.footer-brand span {
+    color: #8b5cf6;
+}
+
+.footer-brand p {
+    margin-top: 12px;
+    font-size: .9rem;
+    opacity: .85;
+    line-height: 1.6;
+}
+
+/* CONTACT */
+.footer-contact {
+    margin-top: 18px;
+}
+
+.footer-contact p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .9rem;
+    margin-bottom: 8px;
+    opacity: .85;
+}
+
+.footer-contact i {
+    color: #8b5cf6;
+}
+
+/* TITLES */
+.footer-title {
+    margin-bottom: 18px;
+    font-size: .95rem;
+    color: #d7c8ff;
+    letter-spacing: 1px;
+}
+
+/* NAV */
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li {
+    margin-bottom: 12px;
+}
+
+.footer-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: .9rem;
+    opacity: .85;
+    transition: .3s;
+}
+
+.footer-nav i {
+    color: #8b5cf6;
+    width: 18px;
+}
+
+.footer-nav a:hover {
+    opacity: 1;
+    transform: translateX(6px);
+}
+
+/* SOCIAL */
+.footer-social {
+    display: flex;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: #fff;
+    transition: .3s;
+}
+
+.footer-social a:hover {
+    background: #8b5cf6;
+    color: #05000d;
+}
+
+/* BOTTOM */
+.footer-bottom {
+    margin-top: 45px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, .15);
+    text-align: center;
+    font-size: .8rem;
+    opacity: .6;
+    z-index: 2;
+    position: relative;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .footer-network {
+        text-align: center;
+    }
+
+    .footer-nav a {
+        justify-content: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-contact p {
+        justify-content: center;
+    }
+}
 </style>
 </head>
 
@@ -1262,6 +1417,48 @@ body{
             <i class="fas fa-chevron-right"></i>
         </div>
     </div>
+    <!-- ================= FOOTER ================= -->
+<footer class="footer-network" id="footer">
+    <canvas id="particles"></canvas>
+
+    <div class="footer-content">
+        <div class="footer-brand">
+            <h3>Porta<span>folio</span></h3>
+            <p>
+                Diseño gráfico, fotografía, marcas,
+                diseño 3D y publicidad creativa.
+            </p>
+
+            <div class="footer-contact">
+                <p><i class="fas fa-envelope"></i> hcunalata61@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +593961025432</p>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <h4 class="footer-title">Mapa</h4>
+            <ul>
+                <li><a href="fotos.html"><i class="fas fa-camera"></i> Fotografía</a></li>
+                <li><a href="Mantenimiento.html"><i class="fas fa-tags"></i> Marcas</a></li>
+                <li><a href="Mantenimiento.html"><i class="fas fa-cube"></i> Diseño 3D</a></li>
+                <li><a href="Mantenimiento.html"><i class="fas fa-bullhorn"></i> Publicidad</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="footer-title">Redes</h4>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Jhonatan Cunalata — Visual Designer
+    </div>
+</footer>
 </div>
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script>
@@ -1474,5 +1671,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 // ===== FIN PANTALLA DE CARGA =====
+// Efecto de partículas para el footer
+const canvas = document.getElementById('particles');
+const footer = document.getElementById('footer');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+    canvas.width = footer.offsetWidth;
+    canvas.height = footer.offsetHeight;
+}
+
+window.addEventListener('resize', resize);
+resize();
+
+let particles = Array.from({ length: 120 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - .5) * 0.6,
+    vy: (Math.random() - .5) * 0.6,
+    r: Math.random() * 2 + 1
+}));
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, .85)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+            let q = particles[j];
+            let dx = p.x - q.x, dy = p.y - q.y;
+            let d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 120) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(139, 92, 246, ${(1 - d / 120) * 0.4})`;
+                ctx.stroke();
+            }
+        }
+    });
+    requestAnimationFrame(animate);
+}
+
+// Iniciar la animación cuando la página cargue
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        animate();
+    }, 500);
+});
     </script>
 </body>

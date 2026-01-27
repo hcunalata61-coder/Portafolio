@@ -446,7 +446,7 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: #6528F7;
+            background: #6a36e4;
             margin: 15px 0 0;
             border-radius: 2px;
             transform: scaleX(0);
@@ -498,7 +498,7 @@
         .texto-container h2 {
             font-size: 2.2rem;
             margin-bottom: 20px;
-            color: #6528F7;
+            color: #a29bfe;
             border-bottom: 2px solid #6528F7;
             padding-bottom: 10px;
             transition: transform 0.3s ease;
@@ -556,7 +556,7 @@
             height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #6528F7;
+            border: 4px solid #a29bfe;
             margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(101, 40, 247, 0.4);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -582,7 +582,7 @@
 
         .titulo {
             font-size: 1rem;
-            color: #6528F7;
+            color: #a29bfe;
             margin-bottom: 20px;
             text-align: center;
             transition: transform 0.3s ease;
@@ -1579,7 +1579,206 @@
         }
 
         /* ===== MEDIA QUERIES ===== */
-        @media (max-width: 1024px) {
+        
+        /* TABLETS HORIZONTALES (1024px - 1200px) */
+        @media (max-width: 1200px) and (min-width: 1025px) {
+            .contenedor-seccion {
+                max-width: 95%;
+            }
+            
+            .proyectos-container {
+                max-width: 95%;
+            }
+            
+            .cards-container {
+                max-width: 500px;
+            }
+            
+            .card {
+                padding: 24px;
+                font-size: 16px;
+            }
+        }
+        
+        /* TABLETS (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* Ajustes generales */
+            .seccion {
+                padding: 90px 1.5rem 1.5rem;
+            }
+            
+            .contenedor-seccion {
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            
+            /* ===== INICIO ===== */
+            #inicio .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .hero-content {
+                max-width: 90%;
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .btns {
+                justify-content: center;
+            }
+            
+            .cards-container {
+                max-width: 650px;
+                margin: 40px auto 0;
+            }
+            
+            .card {
+                padding: 24px 26px;
+                font-size: 16px;
+            }
+            
+            .card.first {
+                transform: rotate(-1.5deg) translateX(-10px) translateY(-6px);
+            }
+            
+            .card.second {
+                transform: rotate(1.5deg) translateX(15px) translateY(12px);
+            }
+            
+            /* Ajustar tipografía */
+            h1, .titulo-seccion {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero-content h3 {
+                font-size: 2rem;
+            }
+            
+            /* Textos más legibles */
+            p {
+                font-size: 1.05rem;
+                line-height: 1.6;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+                max-width: 90%;
+                margin: 0 auto 30px;
+            }
+            
+            /* ===== SOBRE MÍ ===== */
+            .sobre-mi-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .texto-container, 
+            .tarjeta-perfil {
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            
+            .texto-container {
+                padding: 25px;
+            }
+            
+            .tarjeta-perfil {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .texto-container p {
+                font-size: 1.05rem;
+                text-align: justify;
+            }
+            
+            /* Botones */
+            .btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            
+            /* Habilidades en tarjeta de perfil */
+            .habilidad {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+            
+            /* ===== PROYECTOS ===== */
+            .proyectos-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                max-width: 95%;
+            }
+            
+            .imagen-proyecto {
+                height: 200px;
+            }
+            
+            /* ===== HABILIDADES ===== */
+            .habilidades-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                max-width: 95%;
+            }
+            
+            .categoria-habilidad {
+                padding: 25px;
+            }
+            
+            .categoria-habilidad h2 {
+                font-size: 1.6rem;
+            }
+            
+            /* ===== CONTACTO ===== */
+            .contacto-container {
+                grid-template-columns: 1fr;
+                max-width: 90%;
+                gap: 30px;
+            }
+            
+            .info-contacto,
+            .formulario-contacto {
+                padding: 30px;
+            }
+            
+            .info-contacto h2,
+            .formulario-contacto h2 {
+                font-size: 1.8rem;
+            }
+            
+            /* ===== MENÚ DE NAVEGACIÓN ===== */
+            .nav-item {
+                margin-left: 20px;
+            }
+            
+            .nav-link {
+                font-size: 1rem;
+            }
+            
+            /* Submenú en tablets */
+            .submenu {
+                min-width: 200px;
+            }
+            
+            .submenu a {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
             .proyectos-container {
                 grid-template-columns: repeat(2, 1fr);
                 max-width: 800px;

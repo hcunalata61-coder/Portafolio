@@ -120,7 +120,7 @@ body{
 /* HOVER DESKTOP */
 @media(min-width:769px){
     .nav-item:hover .submenu{
-        max-height:220px;
+        max-height:250px;
     }
 }
 
@@ -607,9 +607,9 @@ body{
             color: var(--color-blanco);
         }
         
-        /* Filtros de imagen */
+        /* Filtros de imagen - SOLO QUITAR EL DE EVENTOS */
         .item-collage.evento img {
-            filter: grayscale(100%) contrast(1.1);
+            /* QUITADO: filter: grayscale(100%) contrast(1.1); */
         }
         
         .item-collage.producto img {
@@ -664,7 +664,7 @@ body{
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.98);
-            z-index: 2000;
+            z-index: 10000; /* CAMBIADO: de 2000 a 10000 */
             justify-content: center;
             align-items: center;
             opacity: 0;
@@ -714,18 +714,26 @@ body{
         
         .cerrar-modal {
             position: absolute;
-            top: 20px;
+            top: 30px; /* CAMBIADO: de 20px a 30px */
             right: 30px;
             color: var(--color-blanco);
             font-size: 40px;
             cursor: pointer;
-            z-index: 2001;
+            z-index: 10001; /* CAMBIADO: de 2001 a 10001 */
             transition: var(--transicion);
-            opacity: 0.7;
+            opacity: 0.9;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
         }
         
         .cerrar-modal:hover {
             opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
             transform: rotate(90deg);
         }
         
@@ -736,14 +744,16 @@ body{
             color: var(--color-blanco);
             font-size: 40px;
             cursor: pointer;
-            z-index: 2001;
+            z-index: 10001; /* CAMBIADO: de 2001 a 10001 */
             transition: var(--transicion);
-            opacity: 0.5;
+            opacity: 0.7;
             width: 60px;
             height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
         }
         
         .nav-modal:hover {
@@ -796,6 +806,14 @@ body{
             
             .nav-modal {
                 font-size: 30px;
+            }
+            
+            .cerrar-modal {
+                top: 15px;
+                right: 15px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
             }
         }
         
@@ -916,7 +934,7 @@ body{
      <!-- PANTALLA DE CARGA (añadir esto) -->
     <div id="loading-screen">
         <div class="loading-content">
-            <div class="logo-portfolio">MP</div>
+            <div class="logo-portfolio">Fotografia</div>
             <div class="portfolio-spinner"></div>
             <div class="loading-text-portfolio">Cargando portafolio</div>
         </div>
@@ -940,11 +958,12 @@ body{
                 <ul class="submenu">
                     <li><a href="ilustraciones.html">Ilustración</a></li>
                     <li><a href="fotos.html">Fotografía</a></li>
+                    <li><a href="Mantenimiento.html">Publicidades</a></li>
                     <li><a href="Mantenimiento.html">Diseño 3D</a></li>
                     <li><a href="Mantenimiento.html">Marcas</a></li>
                 </ul>
             </li>
-
+            <li class="nav-item"><a href="#habilidades" class="nav-link">Habilidades</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Contacto</a></li>
         </ul>
 
@@ -987,16 +1006,16 @@ body{
     <div class="slide-info"><strong>Eventos</strong><br>Sociales</div>
 </div>
 
-<div class="swiper-slide" data-title="Productos" data-desc="Imágenes pensadas para mostrar texturas, formas y personalidad, cuidando la luz y el encuadre para que cada producto hable por sí solo.">
+<div class="swiper-slide" data-title="Paisajes" data-desc="Imágenes que resaltan la esencia del entorno a través de la composición y la luz natural.">
     <img class="slide-image" src="Fotografias/IMG_2279.JPG">
     <div class="slide-overlay"></div>
-    <div class="slide-info"><strong>Fotografía</strong><br>de Eventos</div>
+    <div class="slide-info"><strong>Fotografía</strong><br>de Paisajes</div>
 </div>
 
-<div class="swiper-slide" data-title="Paisajes" data-desc="Imágenes que resaltan la esencia del entorno a través de la composición y la luz natural.">
+<div class="swiper-slide" data-title="Productos" data-desc="Imágenes pensadas para mostrar texturas, formas y personalidad, cuidando la luz y el encuadre para que cada producto hable por sí solo.">
     <img class="slide-image" src="Fotografias/Producto5.5.jpeg">
     <div class="slide-overlay"></div>
-    <div class="slide-info"><strong>Fotografía</strong><br>de Paisajes</div>
+    <div class="slide-info"><strong>Fotografía</strong><br>de Productos</div>
 </div>
 
 </div>
@@ -1025,9 +1044,9 @@ body{
         <!-- Filtros -->
         <div class="filtros">
             <button class="filtro-btn active" data-filter="todos">Todos</button>
-            <button class="filtro-btn" data-filter="evento">Eventos B&N</button>
+            <button class="filtro-btn" data-filter="evento">Eventos</button>
             <button class="filtro-btn" data-filter="producto">Producto</button>
-            <button class="filtro-btn" data-filter="bodas">Bodas</button>
+            <button class="filtro-btn" data-filter="paisajes">Paisajes</button>
             <button class="filtro-btn" data-filter="conciertos">Conciertos</button>
         </div>
         
@@ -1036,11 +1055,11 @@ body{
             <!-- Eventos B&N con texto superpuesto -->
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="Fotografias/Evento1.1.jpeg" alt="Boda en blanco y negro">
+                    <img src="Fotografias/Evento1.1.jpeg" alt="Sesión de cumpleaños 28 años">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>CHANDANI<br>+<br>JAMES</h2>
-                    <p>Boda en jardín botánico</p>
+                    <h2>28 <br>& <br>Alice</h2>
+                    <p>Sesión Cumpleaños 28 | Alice Mañay</p>
                 </div>
                 <div class="categoria">Evento</div>
             </div>
@@ -1050,8 +1069,8 @@ body{
                     <img src="Fotografias/Producto5.5.jpeg" alt="Productos de belleza">
                 </div>
                 <div class="texto-imagen blanco">
-                    <h2>BELLEZA<br>NATURAL</h2>
-                    <p>Línea orgánica premium</p>
+                    <h2>Frescura en <br>Bruto</h2>
+                    <p>Estrategia visual para conectar con su público objetivo.</p>
                 </div>
                 <div class="categoria">Producto</div>
             </div>
@@ -1061,140 +1080,162 @@ body{
                     <img src="Fotografias/Concierto1.jpeg" alt="Concierto en blanco y negro">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>JAZZ<br>NIGHT</h2>
-                    <p>Festival Internacional</p>
+                    <h2>Retrato de una Escena</h2>
+                    <p>Una crónica visual de una noche cualquiera que lo cambia todo.</p>
                 </div>
                 <div class="categoria">Concierto</div>
             </div>
             
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Ropa y accesorios">
+                    <img src="Fotografias/Producto5.jpeg" alt="Ropa y accesorios">
                 </div>
                 <div class="texto-imagen blanco">
-                    <h2>COLECCIÓN<br>OTOÑO</h2>
-                    <p>Moda sostenible 2023</p>
+                    <h2>Frescura en <br>Bruto</h2>
+                    <p>Estrategia visual para conectar con su público objetivo.</p>
                 </div>
                 <div class="categoria">Producto</div>
             </div>
             
-            <div class="item-collage evento" data-categoria="bodas">
+            <div class="item-collage evento" data-categoria="paisajes">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Baile de boda">
+                    <img src="Fotografias/Paisaje.jpeg" alt="Paisaje">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>MARÍA<br>+<br>CARLOS</h2>
-                    <p>Primer baile</p>
+                    <h2>Soberanía <br>+<br>Púrpura</h2>
+                    <p>Potente y poético</p>
                 </div>
-                <div class="categoria">Boda</div>
+                <div class="categoria">Paisajes</div>
             </div>
             
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Productos tecnológicos">
+                    <img src="Fotografias/Producto2.jpeg" alt="Fantasia ">
                 </div>
                 <div class="texto-imagen blanco">
-                    <h2>TECNOLOGÍA<br>PREMIUM</h2>
-                    <p>Audífonos de alta gama</p>
+                    <h2>Guardianes del <br>Bosque </h2>
+                    <p>Este proyecto documenta las esculturas fantásticas que dan vida a un rincón del parque</p>
                 </div>
                 <div class="categoria">Producto</div>
             </div>
             
             <div class="item-collage evento" data-categoria="conciertos">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Banda en concierto">
+                    <img src="Fotografias/Concierto4.jpeg" alt="conciertos">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>EN VIVO</h2>
-                    <p>Teatro Municipal</p>
+                    <h2>Retrato de una Escena</h2>
+                    <p>Una crónica visual de una noche cualquiera que lo cambia todo.</p>
+                </div>
+                <div class="categoria">Concierto</div>
+            </div>
+
+            <div class="item-collage evento" data-categoria="conciertos">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Concierto3.jpeg" alt="conciertos">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>Retrato de una Escena</h2>
+                    <p>Una crónica visual de una noche cualquiera que lo cambia todo.</p>
                 </div>
                 <div class="categoria">Concierto</div>
             </div>
             
+ <div class="item-collage evento" data-categoria="conciertos">
+                <div class="contenedor-imagen">
+                    <img src="Fotografias/Concierto2.jpeg" alt="conciertos">
+                </div>
+                <div class="texto-imagen dorado">
+                    <h2>Retrato de una Escena</h2>
+                    <p>Una crónica visual de una noche cualquiera que lo cambia todo.</p>
+                </div>
+                <div class="categoria">Concierto</div>
+            </div>
+
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1556228578-9c360e1d8d34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Perfumes">
+                    <img src="Fotografias/Producto3.jpeg" alt="Fantasia">
                 </div>
                 <div class="texto-imagen blanco">
-                    <h2>FRAGANCIAS<br>EXCLUSIVAS</h2>
-                    <p>Campaña internacional</p>
+                    <h2>Guardianes del <br>Bosque </h2>
+                    <p>Este proyecto documenta las esculturas fantásticas que dan vida a un rincón del parque</p>
                 </div>
                 <div class="categoria">Producto</div>
             </div>
             
-            <div class="item-collage evento" data-categoria="bodas">
+            <div class="item-collage evento" data-categoria="paisajes">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Detalles de boda">
+                    <img src="Fotografias/Paisaje1.jpeg" alt="Detalles de boda">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>DETALLES</h2>
-                    <p>Boda vintage</p>
+                    <h2>Cielo y silueta</h2>
+                    <p>El sol realiza su última proeza</p>
                 </div>
-                <div class="categoria">Boda</div>
+                <div class="categoria">Paisajes</div>
             </div>
             
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Comida gourmet">
+                    <img src="Fotografias/Producto4.jpeg" alt="Comida gourmet">
                 </div>
                 <div class="texto-imagen blanco">
-                    <h2>GASTRONOMÍA<br>GOURMET</h2>
-                    <p>Revista culinaria</p>
+                    <h2>Guardianes del <br>Bosque </h2>
+                    <p>Este proyecto documenta las esculturas fantásticas que dan vida a un rincón del parque</p>
                 </div>
                 <div class="categoria">Producto</div>
             </div>
             
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="Fotografias/Evento1.2.jpeg" alt="Conferencia corporativa">
+                    <img src="Fotografias/Evento1.2.jpeg" alt="Sesión Cumpleaños 28 | Alice Mañay">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>TECH<br>CONFERENCE</h2>
-                    <p>Evento corporativo</p>
+                    <h2>28 & <br>Alice</h2>
+                    <p>Sesión Cumpleaños 28 | Alice Mañay</p>
                 </div>
                 <div class="categoria">Evento</div>
             </div>
 
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="Fotografias/Evento1.3.jpeg" alt="Conferencia corporativa">
+                    <img src="Fotografias/Evento1.3.jpeg" alt="Sesión Cumpleaños 28 | Alice Mañay">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>TECH<br>CONFERENCE</h2>
-                    <p>Evento corporativo</p>
+                    <h2>28 & <br>Alice</h2>
+                    <p>Sesión Cumpleaños 28 | Alice Mañay</p>
                 </div>
                 <div class="categoria">Evento</div>
             </div>
             
             <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="Fotografias/Evento1.4.jpeg" alt="Conferencia corporativa">
+                    <img src="Fotografias/Evento1.4.jpeg" alt="Sesión Cumpleaños 28 | Alice Mañay">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>TECH<br>CONFERENCE</h2>
-                    <p>Evento corporativo</p>
+                    <h2>28 & <br>Alice</h2>
+                    <p>Sesión Cumpleaños 28 | Alice Mañay</p>
                 </div>
                 <div class="categoria">Evento</div>
             </div>
             
 <div class="item-collage evento" data-categoria="evento">
                 <div class="contenedor-imagen">
-                    <img src="Fotografias/Evento1.jpeg" alt="Conferencia corporativa">
+                    <img src="Fotografias/Evento1.jpeg" alt="Sesión Cumpleaños 28 | Alice Mañay">
                 </div>
                 <div class="texto-imagen dorado">
-                    <h2>TECH<br>CONFERENCE</h2>
-                    <p>Evento corporativo</p>
-                </div>n 
+                    <h2>28 & <br>Alice</h2>
+                    <p>Sesión Cumpleaños 28 | Alice Mañay</p>
+                </div>
                 <div class="categoria">Evento</div>
             </div>
 
             <div class="item-collage producto" data-categoria="producto">
                 <div class="contenedor-imagen">
-                    <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800&q=80" alt="Vinos y bebidas">
+                    <img src="Fotografias/Producto1.jpeg" alt="Vinos y bebidas">
                 </div>
                 <div class="texto-imagen blanco">
-                    <h2>VINOS<br>DE AUTOR</h2>
-                    <p>Selección premium</p>
+                    <h2>Brindis  <br>con el Mar</h2>
+                    <p>Esta fotografía captura el instante perfecto donde el lujo y la frescura se encuentran.</p>
                 </div>
                 <div class="categoria">Producto</div>
             </div>
@@ -1435,4 +1476,3 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== FIN PANTALLA DE CARGA =====
     </script>
 </body>
-</html>

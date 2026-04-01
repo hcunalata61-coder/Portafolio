@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MDW 3D + Portafolio Publicitario | Pantalla de carga + Footer con partículas</title>
+
+<!-- ICONOS Y FUENTES -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================
+   RESET Y BASE (solo para el portafolio principal)
+===================================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Helvetica, Arial, sans-serif;
+    color:#fff;
+    min-height:100vh;
+    background: #f8fafc;
+}
+
+/* =====================================================
+   ESTILOS DE LA PANTALLA DE CARGA (desde el primer portafolio)
+===================================================== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.logo-portfolio {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #7c3aed;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.portfolio-spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(124, 58, 237, 0.1);
+    border-radius: 50%;
+    border-top-color: #7c3aed;
+    margin: 0 auto 30px;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text-portfolio {
+    color: #666;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+/* Contenedor principal que se mostrará después de la carga */
+#main-content {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+/* =====================================================
+   ESTILOS DEL PORTAFOLIO PUBLICITARIO (segundo código)
+===================================================== */
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    z-index:9999;
+    background:transparent;
+    transition:background .3s ease, backdrop-filter .3s ease;
+}
+
+.navbar.scrolled{
+    background:rgba(15,32,39,.35);
+    backdrop-filter:blur(12px);
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    height:70px;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:1.8rem;
+    font-weight:700;
+}
+.logo span{color:#6528F7;}
+
+.nav-menu{
+    display:flex;
+    list-style:none;
+}
+
+.nav-item{
+    margin-left:30px;
+    position:relative;
+}
+
+.nav-link{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.nav-link:hover{
+    color:#6528F7;
+}
+
+.submenu{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:180px;
+    background:rgba(15,32,39,.95);
+    list-style:none;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    border-radius:6px;
+}
+
+.submenu li a{
+    display:block;
+    padding:12px;
+    color:#fff;
+    text-decoration:none;
+}
+
+.submenu li a:hover{
+    background:rgba(101,40,247,.15);
+    color:#6528F7;
+}
+
+/* HOVER DESKTOP */
+@media(min-width:769px){
+    .nav-item:hover .submenu{
+        max-height:220px;
+    }
+}
+
+.hamburger{
+    display:none;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+
+/* MOBILE MENU */
+@media(max-width:768px){
+    .hamburger{display:block;}
+
+    .nav-menu{
+        position:fixed;
+        top:70px;
+        left:-100%;
+        width:100%;
+        flex-direction:column;
+        background:rgba(15,32,39,.95);
+        align-items:center;
+        transition:.4s;
+        padding:20px 0;
+    }
+
+    .nav-menu.active{left:0;}
+
+    .nav-item{
+        margin:15px 0;
+        width:100%;
+        text-align:center;
+    }
+
+    .nav-link{
+        justify-content:center;
+    }
+
+    .submenu{
+        position:static;
+        width:100%;
+        background:transparent;
+    }
+
+    .submenu li a{
+        border-top:1px solid rgba(255,255,255,.08);
+    }
+}
+
+/* =====================================================
+   ESTILOS EXCLUSIVOS DE LA PRIMERA SECCIÓN (HERO)
+===================================================== */
+.hero-section{
+    background:#D2C18F;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+    padding-top: 100px;
+}
+
+.hero-section .container{
+    max-width:1200px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:90px;
+}
+
+.hero-section .col{
+    width:50%;
+}
+
+.hero-section h1{
+    font-size:70px;
+    font-weight:600;
+    line-height:1;
+    margin-bottom:30px;
+    color:#ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-family:'Poppins', sans-serif;
+}
+
+.hero-section .button{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    padding:18px 35px;
+    background:#8114e1;
+    color:#fff;
+    text-decoration:none;
+    font-weight:500;
+    border-radius:6px;
+    transition:.3s;
+    font-family:'Poppins', sans-serif;
+}
+
+.hero-section .button:hover{
+    transform:translateY(-2px);
+    background:#784aed;
+}
+
+.hero-section .phone-wrapper{
+    position:relative;
+    height:600px;
+    perspective:1000px;
+    max-width:100%;
+}
+
+.hero-section .phone{
+    width:100%;
+    height:100%;
+    background:url("/Publicidades/publicidad.webp") center/contain no-repeat;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform .15s ease-out;
+}
+
+.hero-section .phone::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url("https://template.makedreamwebsite.com/wp-content/uploads/2022/06/mobile-frame.png") center/contain no-repeat;
+    pointer-events:none;
+}
+
+/* RESPONSIVE HERO */
+@media(max-width:900px){
+    .hero-section .container{
+        flex-direction:column;
+        gap:0;
+    }
+    .hero-section .col{
+        width:100%;
+    }
+    .hero-section .col:first-child{
+        margin-bottom:70px;
+    }
+    .hero-section h1{
+        font-size:38px;
+        margin-bottom:25px;
+        text-align:center;
+    }
+    .hero-section .button{
+        display:flex;
+        justify-content:center;
+        width:fit-content;
+        margin:0 auto;
+    }
+    .hero-section .phone-wrapper{
+        height:420px;
+        margin-top:10px;
+    }
+}
+
+@media(max-width:480px){
+    .hero-section .col:first-child{
+        margin-bottom:80px;
+    }
+    .hero-section .phone-wrapper{
+        height:380px;
+    }
+    .hero-section h1{
+        font-size:32px;
+    }
+}
+
+@media(min-width:1400px){
+    .hero-section .container{
+        max-width:1300px;
+        gap:120px;
+    }
+    .hero-section .phone-wrapper{
+        height:650px;
+    }
+    .hero-section h1{
+        font-size:80px;
+    }
+}
+
+/* =====================================================
+   ESTILOS DE LA GALERÍA (portafolio publicitario)
+   + EFECTO DE SCROLL (aparición de tarjetas)
+===================================================== */
+.ad-portfolio {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    background: #f8fafc;
+    color: #0f172a;
+    font-family: 'Inter', sans-serif;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+.section-header .badge {
+    display: inline-block;
+    background: rgba(99, 102, 241, 0.12);
+    backdrop-filter: blur(2px);
+    padding: 0.35rem 1rem;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #4f46e5;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    border: 1px solid rgba(79, 70, 229, 0.2);
+}
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+}
+.section-header p {
+    font-size: 1.2rem;
+    color: #475569;
+    max-width: 620px;
+    margin: 1rem auto 0;
+    font-weight: 400;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+/* Estilos base para las tarjetas con animación de entrada */
+.project-card {
+    background: #ffffff;
+    border-radius: 1.75rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s;
+}
+.project-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.12);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+.card-img {
+    position: relative;
+    background: #eef2ff;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease-out;
+    display: block;
+    background: #f1f5f9;
+}
+.project-card:hover .card-img img {
+    transform: scale(1.02);
+}
+.card-category {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(8px);
+    padding: 0.3rem 1rem;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: white;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.2);
+    z-index: 2;
+}
+
+.card-content {
+    padding: 1.6rem 1.5rem 1.8rem;
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+    color: #0f172a;
+}
+.card-client {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #4f46e5;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+.card-client i {
+    font-size: 0.8rem;
+    color: #818cf8;
+}
+.card-desc {
+    font-size: 0.9rem;
+    color: #334155;
+    margin-bottom: 1.3rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.card-role {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.role-tag {
+    background: #f1f5f9;
+    border-radius: 40px;
+    padding: 0.2rem 0.9rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+}
+.btn-details {
+    background: transparent;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #4f46e5;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    transition: gap 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+.btn-details i {
+    transition: transform 0.2s ease;
+}
+.btn-details:hover {
+    gap: 0.75rem;
+    color: #6366f1;
+}
+.btn-details:hover i {
+    transform: translateX(4px);
+}
+
+/* MODAL - MEJORADO PARA NO SOBREPONERSE AL MENÚ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;  /* Mayor que el menú (9999) */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.25s ease;
+    padding: 1rem;
+}
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+.modal-container {
+    background: #ffffff;
+    max-width: 1000px;
+    width: 100%;
+    border-radius: 2rem;
+    overflow-y: auto;
+    max-height: 90vh;
+    box-shadow: 0 40px 70px rgba(0, 0, 0, 0.4);
+    transform: scale(0.96);
+    transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    margin-top: 20px; /* Espacio desde el borde superior para no chocar con el menú */
+}
+.modal-overlay.active .modal-container {
+    transform: scale(1);
+}
+
+/* Ajuste para que en móviles no quede demasiado pegado */
+@media (max-width: 768px) {
+    .modal-container {
+        margin-top: 60px;
+        max-height: 85vh;
+    }
+}
+
+/* CARRUSEL - ESTILO ORIGINAL */
+.carousel-container {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.4));
+    border-radius: 1.5rem 1.5rem 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+}
+.carousel-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 40px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+    backdrop-filter: blur(0.5px);
+}
+.carousel-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+.carousel-slide {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.carousel-img {
+    width: 100%;
+    flex-shrink: 0;
+    height: auto;
+    max-height: 65vh;
+    object-fit: contain;
+    background: transparent;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+}
+/* Estilo adicional para el video dentro del carrusel */
+.carousel-img video {
+    width: 100%;
+    height: auto;
+    max-height: 65vh;
+    outline: none;
+    display: block;
+}
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 30;
+    font-weight: 300;
+}
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.8);
+    transform: translateY(-50%) scale(1.05);
+}
+.btn-prev {
+    left: 1rem;
+}
+.btn-next {
+    right: 1rem;
+}
+.carousel-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+    z-index: 30;
+    padding: 0.5rem;
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.dot.active {
+    background: white;
+    width: 28px;
+    border-radius: 20px;
+}
+
+.modal-content {
+    padding: 2rem 2rem 2.2rem;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+.modal-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+}
+.close-modal {
+    background: #f1f5f9;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 60px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #334155;
+    transition: all 0.2s;
+}
+.close-modal:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+.modal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 1.2rem;
+    border-bottom: 1px solid #eef2ff;
+    padding-bottom: 1rem;
+}
+.modal-meta span {
+    background: #f8fafc;
+    padding: 0.3rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1e293b;
+}
+.modal-meta i {
+    color: #6366f1;
+}
+.modal-description {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #334155;
+    margin-bottom: 1.5rem;
+}
+.modal-extras {
+    background: #f8fafc;
+    padding: 1.2rem;
+    border-radius: 1.2rem;
+    margin-top: 0.5rem;
+}
+.modal-extras p {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+}
+.modal-extras ul {
+    padding-left: 1.2rem;
+    color: #475569;
+    font-size: 0.9rem;
+}
+.modal-extras li {
+    margin: 0.4rem 0;
+}
+
+@media (max-width: 700px) {
+    .ad-portfolio {
+        padding: 3rem 1.5rem;
+    }
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .modal-content {
+        padding: 1.5rem;
+    }
+    .modal-header h3 {
+        font-size: 1.5rem;
+    }
+    .carousel-img, .carousel-img video {
+        max-height: 50vh;
+    }
+    .carousel-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+    }
+}
+
+/* =====================================================
+   ESTILOS DEL FOOTER CON PARTÍCULAS
+===================================================== */
+.footer-network {
+    position: relative;
+    padding: 70px 6% 30px;
+    background: linear-gradient(135deg, #040008, #0c0016, #020006);
+    overflow: hidden;
+    margin-top: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+.footer-network canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 45px;
+    z-index: 2;
+}
+
+.footer-brand h3 {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.footer-brand span {
+    color: #8b5cf6;
+}
+
+.footer-brand p {
+    margin-top: 12px;
+    font-size: .9rem;
+    opacity: .85;
+    line-height: 1.6;
+}
+
+.footer-contact {
+    margin-top: 18px;
+}
+
+.footer-contact p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .9rem;
+    margin-bottom: 8px;
+    opacity: .85;
+}
+
+.footer-contact i {
+    color: #8b5cf6;
+}
+
+.footer-title {
+    margin-bottom: 18px;
+    font-size: .95rem;
+    color: #d7c8ff;
+    letter-spacing: 1px;
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li {
+    margin-bottom: 12px;
+}
+
+.footer-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: .9rem;
+    opacity: .85;
+    transition: .3s;
+}
+
+.footer-nav i {
+    color: #8b5cf6;
+    width: 18px;
+}
+
+.footer-nav a:hover {
+    opacity: 1;
+    transform: translateX(6px);
+}
+
+.footer-social {
+    display: flex;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: #fff;
+    transition: .3s;
+}
+
+.footer-social a:hover {
+    background: #8b5cf6;
+    color: #05000d;
+}
+
+.footer-bottom {
+    margin-top: 45px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, .15);
+    text-align: center;
+    font-size: .8rem;
+    opacity: .6;
+    z-index: 2;
+    position: relative;
+}
+
+/* RESPONSIVE FOOTER */
+@media (max-width: 768px) {
+    .footer-network {
+        text-align: center;
+    }
+    .footer-nav a {
+        justify-content: center;
+    }
+    .footer-social {
+        justify-content: center;
+    }
+    .footer-contact p {
+        justify-content: center;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Pantalla de carga (del primer portafolio) -->
+<div id="loading-screen">
+    <div class="loading-content">
+        <div class="logo-portfolio">Publicidades</div>
+        <div class="portfolio-spinner"></div>
+        <div class="loading-text-portfolio">Cargando portafolio</div>
+    </div>
+</div>
+
+<!-- Contenedor principal que muestra todo el contenido del segundo portafolio + footer -->
+<div id="main-content" style="opacity:0;">
+    <!-- =====================================================
+         🔽 MENÚ (sin alterar)
+    ===================================================== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="Index.html" class="logo">Porta<span>folio</span></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="Index.html" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="Index.html" class="nav-link">Sobre mí</a></li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link submenu-toggle">
+                        Proyectos <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="ilustraciones.html">Ilustración</a></li>
+                        <li><a href="fotos.html">Fotografía</a></li>
+                        <li><a href="Mantenimiento.html">Publicidades</a></li>
+                        <li><a href="Mantenimiento.html">Diseño 3D</a></li>
+                        <li><a href="Mantenimiento.html">Marcas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="Index.html" class="nav-link">Habilidades</a></li>
+                <li class="nav-item"><a href="Mantenimiento.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =====================================================
+         🔽 PRIMERA SECCIÓN (efecto 3D, intacta)
+    ===================================================== -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="col">
+                <h1>Transformamos ideas en experiencias visuales</h1>
+                <a href="#" class="button">
+                    Ver mas
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col">
+                <div class="phone-wrapper">
+                    <div class="phone"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         🔽 SECCIÓN DEL PORTAFOLIO PUBLICITARIO
+    ===================================================== -->
+    <section class="ad-portfolio">
+        <div class="section-header">
+            <div class="badge">
+                <i class="fas fa-images" style="margin-right: 6px;"></i> Casos de éxito · Publicidad real
+            </div>
+            <h2>Proyectos <span style="background: linear-gradient(135deg, #4f46e5, #c2410c); background-clip: text; -webkit-background-clip: text; color: transparent;">que transforman marcas</span></h2>
+            <p>Campañas 360° para restaurantes, instituciones educativas, gobiernos locales y bienes raíces. Cada proyecto refleja una estrategia de comunicación efectiva.</p>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- =====================================================
+         🔽 FOOTER CON PARTÍCULAS (nuevo)
+    ===================================================== -->
+    <footer class="footer-network" id="footer">
+        <canvas id="particlesCanvas"></canvas>
+
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Porta<span>folio</span></h3>
+                <p>
+                    Diseño gráfico, fotografía, marcas,<br>
+                    diseño 3D y publicidad creativa.
+                </p>
+
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> hcunalata61@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +593961025432</p>
+                </div>
+            </div>
+
+            <div class="footer-nav">
+                <h4 class="footer-title">Mapa</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-camera"></i> Fotografía</a></li>
+                    <li><a href="#"><i class="fas fa-tags"></i> Marcas</a></li>
+                    <li><a href="#"><i class="fas fa-cube"></i> Diseño 3D</a></li>
+                    <li><a href="#"><i class="fas fa-bullhorn"></i> Publicidad</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Redes</h4>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/samuel.cunalata.764699"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/samael_c12/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/hcunalata61-coder"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Jhonatan Cunalata — Visual Designer
+        </div>
+    </footer>
+
+    <!-- Modal con carrusel (sigue igual) -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-container">
+            <div class="carousel-container" id="carouselContainer">
+                <div class="carousel-slide" id="carouselSlide"></div>
+                <button class="carousel-btn btn-prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn btn-next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Título Proyecto</h3>
+                    <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-meta" id="modalMeta"></div>
+                <div class="modal-description" id="modalDesc"></div>
+                <div class="modal-extras" id="modalExtras"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* =====================================================
+   🔽 JS DEL MENÚ (sin alterar)
+===================================================== */
+const navbar = document.querySelector('.navbar');
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+window.addEventListener('scroll',()=>{
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+hamburger.addEventListener('click',()=>{
+    navMenu.classList.toggle('active');
+});
+
+document.querySelectorAll('.submenu-toggle').forEach(toggle=>{
+    toggle.addEventListener('click',e=>{
+        if(window.innerWidth <= 768){
+            e.preventDefault();
+            const submenu = toggle.nextElementSibling;
+            submenu.style.maxHeight
+                ? submenu.style.maxHeight = null
+                : submenu.style.maxHeight = submenu.scrollHeight + "px";
+        }
+    });
+});
+
+/* =====================================================
+   🔽 JS DEL EFECTO 3D (solo hero-section)
+===================================================== */
+const heroWrapper = document.querySelector('.hero-section .phone-wrapper');
+const heroPhone = document.querySelector('.hero-section .phone');
+
+if(heroWrapper && heroPhone){
+    heroWrapper.addEventListener('mousemove', (e) => {
+        const rect = heroWrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateY = ((x - centerX) / centerX) * 12;
+        const rotateX = -((y - centerY) / centerY) * 12;
+
+        heroPhone.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    heroWrapper.addEventListener('mouseleave', () => {
+        heroPhone.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+}
+
+/* =====================================================
+   🔽 DATOS DE PROYECTOS (con video incluido en Zumbahua)
+===================================================== */
+const projectsData = [
+    {
+        id: 1,
+        title: "Chanchipapas",
+        client: "Restaurante Chanchipapas",
+        category: "Publicidad en Redes Sociales",
+        role: ["Community Manager", "Diseño Gráfico", "Estrategia de Contenidos"],
+        images: [
+            "/Publicidades/Chanchipapas/publicidad de exteriores.jpg",
+            "/Publicidades/Chanchipapas/CODIGO QR.jpg",
+            "/Publicidades/Chanchipapas/face.jpg",
+            "/Publicidades/Chanchipapas/publicidad local.jpg",
+            "/Publicidades/Chanchipapas/triptico.jpg",
+        ],
+        shortDesc: "Campaña de redes sociales para posicionar la marca de comida rápida.",
+        fullDesc: "Para el restaurante Chanchipapas desarrollamos una estrategia integral en Instagram y Facebook. Creamos piezas gráficas atractivas, contenido promocional y campañas de interacción que incrementaron la afluencia de clientes en un 35% en dos meses. Se manejó publicidad segmentada y storytelling culinario para conectar con el público joven.",
+        achievements: ["+35% de ventas durante la campaña", "Alcance de 80K personas en redes", "Crecimiento de seguidores del 120%"]
+    },
+    {
+        id: 2,
+        title: "UTC Comunicación Institucional",
+        client: "Universidad Técnica de Cotopaxi",
+        category: "Gestión de Contenidos",
+        role: ["Community Manager", "Redactor Institucional"],
+        images: [
+            "/Publicidades/UTC Comunicación Institucional/portada.jpeg",
+            "/Publicidades/UTC Comunicación Institucional/publicidad-02.jpg.jpeg",
+            "/Publicidades/UTC Comunicación Institucional/1.jpeg",
+            "/Publicidades/UTC Comunicación Institucional/2.jpeg",
+            "/Publicidades/UTC Comunicación Institucional/4.jpeg",
+            "/Publicidades/UTC Comunicación Institucional/5.jpeg",
+            "/Publicidades/UTC Comunicación Institucional/3.jpeg"
+        ],
+        shortDesc: "Difusión de noticias y eventos de la universidad en redes.",
+        fullDesc: "En el área de Comunicación Institucional de la UTC gestionamos las publicaciones diarias sobre noticias, eventos académicos y logros estudiantiles. Se implementó un calendario editorial que aumentó la interacción con la comunidad universitaria y mejoró la percepción de transparencia informativa. Se utilizaron formatos multimedia para amplificar el alcance.",
+        achievements: ["Aumento del 60% en engagement", "Cobertura en medios locales", "Mayor visibilidad de eventos institucionales"]
+    },
+    {
+        id: 3,
+        title: "UTC Investigación",
+        client: "Universidad Técnica de Cotopaxi - DII",
+        category: "Actualización de Líneas de Investigación",
+        role: ["Community Manager", "Gestor de Contenidos Científicos"],
+        images: [
+            "/Publicidades/UTC  Investigacion/trabajo 1-02.jpg",
+            "/Publicidades/UTC  Investigacion/trabajo 1-03.jpg",
+            "/Publicidades/UTC  Investigacion/trabajo 1-04.jpg",
+            "/Publicidades/UTC  Investigacion/trabajo 1-05.jpg",
+            "/Publicidades/UTC  Investigacion/trabajo parte 2-02.jpg",
+            "/Publicidades/UTC  Investigacion/WhatsApp Image 2026-03-31 at 23.35.18 (1).jpeg"
+        ],
+        shortDesc: "Promoción de líneas de investigación y proyectos científicos.",
+        fullDesc: "Trabajamos con la Dirección de Investigación de la UTC para dar visibilidad a las líneas de investigación, proyectos de docentes y convocatorias. Se crearon infografías, videos explicativos y publicaciones periódicas que facilitaron la difusión del conocimiento científico y fortalecieron la cultura investigativa en la universidad.",
+        achievements: ["Incremento del 45% en postulaciones a convocatorias", "Mayor participación de estudiantes en semilleros", "Reconocimiento interno"]
+    },
+    {
+        id: 4,
+        title: "GAD Parroquial Zumbahua",
+        client: "Gobierno Autónomo Descentralizado Parroquial de Zumbahua",
+        category: "Comunicación Digital",
+        role: ["Diseñador Web", "Community Manager"],
+        images: [
+            "https://zumbahua.gob.ec/cotopaxi/wp-content/uploads/2025/08/Imagen-de-WhatsApp-2025-08-10-a-las-09.26.05_764cb0b7.jpg",   // imagen miniatura
+            "https://zumbahua.gob.ec/cotopaxi/wp-content/uploads/2025/07/12.-ZUMBAHUA.mp4", // VIDEO REAL
+            "https://zumbahua.gob.ec/cotopaxi/wp-content/uploads/2025/07/510730354_1512428950163535_4161053221363673898_n.jpg",
+            "https://zumbahua.gob.ec/cotopaxi/wp-content/uploads/2025/07/511590105_1512427400163690_1413009031071326388_n.jpg"
+        ],
+        shortDesc: "Actualización y gestión de noticias en la página web y redes.",
+        fullDesc: "Se renovó la página web del GAD Parroquial de Zumbahua, optimizando la presentación de noticias, servicios y eventos. Además, se gestionaron las redes sociales para informar a la comunidad sobre proyectos, convocatorias y actividades. La comunicación se volvió más ágil y accesible, mejorando la participación ciudadana.",
+        achievements: ["Reducción del tiempo de respuesta a la ciudadanía", "Incremento del tráfico web en un 200%", "Mayor transparencia informativa"]
+    },
+    {
+        id: 5,
+        title: "Bienes Raíces - Venta de Terrenos",
+        client: "Inmobiliaria Andes Real",
+        category: "Publicidad en Redes Sociales",
+        role: ["Estratega Digital", "Diseñador Publicitario"],
+        images: [
+            "/Publicidades/Bienes Raíces/4.jpeg",
+            "/Publicidades/Bienes Raíces/2.jpeg",
+            "/Publicidades/Bienes Raíces/3.jpeg",
+            "/Publicidades/Bienes Raíces/1.jpeg",
+        ],
+        shortDesc: "Campañas de Facebook e Instagram para venta de lotes y terrenos.",
+        fullDesc: "Desarrollamos una estrategia de publicidad segmentada para una inmobiliaria especializada en terrenos. Se crearon anuncios con visualizaciones atractivas, tours virtuales y contenido informativo sobre ubicación y plusvalía. La campaña generó un alto número de leads calificados y aceleró las ventas en un 25% durante el primer trimestre.",
+        achievements: ["+120 leads calificados", "ROI 4:1 en inversión publicitaria", "Cierre de 8 ventas en 3 meses"]
+    }
+];
+
+// Elementos DOM
+const projectsGrid = document.getElementById('projectsGrid');
+const modalElem = document.getElementById('projectModal');
+const carouselSlide = document.getElementById('carouselSlide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const carouselDots = document.getElementById('carouselDots');
+const modalTitle = document.getElementById('modalTitle');
+const modalMeta = document.getElementById('modalMeta');
+const modalDesc = document.getElementById('modalDesc');
+const modalExtras = document.getElementById('modalExtras');
+const closeModalBtn = document.getElementById('closeModalBtn');
+
+let currentProjectImages = [];
+let currentIndex = 0;
+let currentProjectId = null;
+
+// Función auxiliar para pausar todos los videos dentro del carrusel
+function pauseAllVideos() {
+    const videos = carouselSlide.querySelectorAll('video');
+    videos.forEach(video => {
+        if (!video.paused) {
+            video.pause();
+        }
+    });
+}
+
+function renderProjects() {
+    projectsGrid.innerHTML = '';
+    projectsData.forEach((project, idx) => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.style.transitionDelay = `${idx * 0.05}s`;
+        card.setAttribute('data-id', project.id);
+        const previewImg = project.images[0] || 'https://picsum.photos/id/1/800/600';
+        card.innerHTML = `
+            <div class="card-img">
+                <img src="${previewImg}" alt="${project.title}" loading="lazy">
+                <span class="card-category">${project.category}</span>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">${project.title}</h3>
+                <div class="card-client">
+                    <i class="fas fa-building"></i> ${project.client}
+                </div>
+                <p class="card-desc">${project.shortDesc}</p>
+                <div class="card-role">
+                    ${project.role.map(r => `<span class="role-tag">${r}</span>`).join('')}
+                </div>
+                <button class="btn-details" data-id="${project.id}">
+                    Ver galería completa <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        `;
+        projectsGrid.appendChild(card);
+    });
+
+    // Intersection Observer para aparición al scroll
+    const cards = document.querySelectorAll('.project-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+    cards.forEach(card => observer.observe(card));
+
+    // Eventos para botones
+    document.querySelectorAll('.btn-details').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const cardElem = btn.closest('.project-card');
+            const projectId = parseInt(cardElem.getAttribute('data-id'));
+            openModal(projectId);
+        });
+    });
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.btn-details')) return;
+            const projectId = parseInt(card.getAttribute('data-id'));
+            openModal(projectId);
+        });
+    });
+}
+
+function updateCarousel() {
+    if (!currentProjectImages.length) return;
+    carouselSlide.innerHTML = '';
+    currentProjectImages.forEach((src, idx) => {
+        // Detectar si es video por extensión
+        const isVideo = src.match(/\.(mp4|webm|ogg)(\?.*)?$/i);
+        
+        if (isVideo) {
+            const video = document.createElement('video');
+            video.src = src;
+            video.controls = true;
+            video.autoplay = false;
+            video.loop = false;
+            video.muted = false;
+            video.className = 'carousel-img';
+            video.style.maxHeight = '65vh';
+            video.style.width = '100%';
+            video.style.objectFit = 'contain';
+            carouselSlide.appendChild(video);
+        } else {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Visual ${idx+1}`;
+            img.className = 'carousel-img';
+            carouselSlide.appendChild(img);
+        }
+    });
+    carouselSlide.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    carouselDots.innerHTML = '';
+    currentProjectImages.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (idx === currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            // Antes de cambiar, pausar videos
+            pauseAllVideos();
+            currentIndex = idx;
+            updateCarousel();
+        });
+        carouselDots.appendChild(dot);
+    });
+}
+
+function nextImage() {
+    if (currentProjectImages.length === 0) return;
+    pauseAllVideos();
+    currentIndex = (currentIndex + 1) % currentProjectImages.length;
+    updateCarousel();
+}
+function prevImage() {
+    if (currentProjectImages.length === 0) return;
+    pauseAllVideos();
+    currentIndex = (currentIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+    updateCarousel();
+}
+
+function openModal(projectId) {
+    const project = projectsData.find(p => p.id === projectId);
+    if (!project) return;
+    currentProjectId = project.id;
+    currentProjectImages = [...project.images];
+    currentIndex = 0;
+    
+    updateCarousel();
+    
+    modalTitle.innerText = project.title;
+    modalMeta.innerHTML = `
+        <span><i class="fas fa-tag"></i> ${project.category}</span>
+        <span><i class="fas fa-user-check"></i> Cliente: ${project.client}</span>
+        <span><i class="fas fa-users"></i> Rol: ${project.role.join(' · ')}</span>
+    `;
+    modalDesc.innerText = project.fullDesc;
+    if (project.achievements && project.achievements.length) {
+        modalExtras.innerHTML = `
+            <p><i class="fas fa-trophy" style="color: #f59e0b;"></i> Logros destacados</p>
+            <ul>
+                ${project.achievements.map(ach => `<li><i class="fas fa-check-circle" style="color: #10b981; font-size: 0.75rem; margin-right: 8px;"></i> ${ach}</li>`).join('')}
+            </ul>
+        `;
+    } else {
+        modalExtras.innerHTML = `<p><i class="fas fa-chart-line"></i> Resultados medibles que superaron las expectativas.</p>`;
+    }
+    
+    modalElem.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    pauseAllVideos();
+    modalElem.classList.remove('active');
+    document.body.style.overflow = '';
+    currentProjectImages = [];
+    currentIndex = 0;
+}
+
+prevBtn.addEventListener('click', prevImage);
+nextBtn.addEventListener('click', nextImage);
+closeModalBtn.addEventListener('click', closeModal);
+modalElem.addEventListener('click', (e) => {
+    if (e.target === modalElem) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+    if (!modalElem.classList.contains('active')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+});
+
+renderProjects();
+
+/* =====================================================
+   🔽 LÓGICA DE LA PANTALLA DE CARGA (integrada)
+===================================================== */
+const loadingScreen = document.getElementById('loading-screen');
+const mainContent = document.getElementById('main-content');
+
+setTimeout(() => {
+    loadingScreen.style.opacity = '0';
+    loadingScreen.style.visibility = 'hidden';
+    setTimeout(() => {
+        mainContent.style.opacity = '1';
+    }, 100);
+}, 2000);
+
+document.addEventListener('keydown', function(e) {
+    if (e.key && loadingScreen.style.opacity !== '0') {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+        mainContent.style.opacity = '1';
+    }
+});
+
+/* =====================================================
+   🔽 EFECTO DE PARTÍCULAS PARA EL FOOTER
+===================================================== */
+const particlesCanvas = document.getElementById('particlesCanvas');
+const footerEl = document.getElementById('footer');
+
+function resizeParticles() {
+    if (footerEl) {
+        particlesCanvas.width = footerEl.offsetWidth;
+        particlesCanvas.height = footerEl.offsetHeight;
+    }
+}
+
+window.addEventListener('resize', resizeParticles);
+resizeParticles();
+
+let particles = [];
+function initParticles() {
+    if (!particlesCanvas) return;
+    const w = particlesCanvas.width;
+    const h = particlesCanvas.height;
+    particles = Array.from({ length: 120 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * 2 + 1
+    }));
+}
+
+function animateParticles() {
+    if (!particlesCanvas) return;
+    const ctx = particlesCanvas.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > particlesCanvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > particlesCanvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+            let q = particles[j];
+            let dx = p.x - q.x, dy = p.y - q.y;
+            let d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 120) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(139, 92, 246, ${(1 - d / 120) * 0.4})`;
+                ctx.stroke();
+            }
+        }
+    });
+    requestAnimationFrame(animateParticles);
+}
+
+// Iniciar partículas cuando el contenido principal esté visible
+setTimeout(() => {
+    if (footerEl) {
+        resizeParticles();
+        initParticles();
+        animateParticles();
+    }
+}, 2500);
+</script>
+</body>
+</html>

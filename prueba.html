@@ -3,450 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDW 3D + Menú | Estructura para múltiples secciones</title>
+<title>Character Design Studio</title>
 
-<!-- ICONOS Y FUENTES -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* =====================================================
-   RESET Y BASE GLOBAL
-===================================================== */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
-    font-family:Helvetica, Arial, sans-serif;
-    /* el fondo ya no se define aquí, será responsabilidad de cada sección */
-    color:#fff;
-    min-height:100vh;
+    background:#f5f5f5;
+    color:#111;
 }
 
-/* =====================================================
-   🔽 MENÚ / NAVBAR (sin alterar, funciona en toda la página)
-===================================================== */
-.navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70px;
-    z-index:9999;
-    background:transparent;
-    transition:background .3s ease, backdrop-filter .3s ease;
-}
-
-.navbar.scrolled{
-    background:rgba(15,32,39,.35);
-    backdrop-filter:blur(12px);
-}
-
-.nav-container{
-    max-width:1200px;
-    margin:auto;
-    height:70px;
-    padding:0 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    color:#fff;
-    text-decoration:none;
-    font-size:1.8rem;
-    font-weight:700;
-}
-.logo span{color:#6528F7;}
-
-.nav-menu{
-    display:flex;
-    list-style:none;
-}
-
-.nav-item{
-    margin-left:30px;
-    position:relative;
-}
-
-.nav-link{
-    color:#fff;
-    text-decoration:none;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
-
-.nav-link:hover{
-    color:#6528F7;
-}
-
-.submenu{
+/* NAV */
+nav{
     position:absolute;
-    top:100%;
-    left:0;
-    width:180px;
-    background:rgba(15,32,39,.95);
-    list-style:none;
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .4s ease;
-    border-radius:6px;
+    top:20px;
+    right:40px;
 }
 
-.submenu li a{
-    display:block;
-    padding:12px;
-    color:#fff;
+nav a{
+    margin-left:20px;
     text-decoration:none;
-}
-
-.submenu li a:hover{
-    background:rgba(101,40,247,.15);
-    color:#6528F7;
-}
-
-/* HOVER DESKTOP */
-@media(min-width:769px){
-    .nav-item:hover .submenu{
-        max-height:220px;
-    }
-}
-
-.hamburger{
-    display:none;
-    font-size:1.5rem;
-    cursor:pointer;
-}
-
-/* MOBILE MENU */
-@media(max-width:768px){
-    .hamburger{display:block;}
-
-    .nav-menu{
-        position:fixed;
-        top:70px;
-        left:-100%;
-        width:100%;
-        flex-direction:column;
-        background:rgba(15,32,39,.95);
-        align-items:center;
-        transition:.4s;
-        padding:20px 0;
-    }
-
-    .nav-menu.active{left:0;}
-
-    .nav-item{
-        margin:15px 0;
-        width:100%;
-        text-align:center;
-    }
-
-    .nav-link{
-        justify-content:center;
-    }
-
-    .submenu{
-        position:static;
-        width:100%;
-        background:transparent;
-    }
-
-    .submenu li a{
-        border-top:1px solid rgba(255,255,255,.08);
-    }
-}
-
-/* =====================================================
-   ESTILOS EXCLUSIVOS DE LA PRIMERA SECCIÓN (HERO)
-   ===================================================== */
-.hero-section{
-    background:#D2C18F;  /* fondo específico para la primera sección */
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:40px 20px;
-    padding-top: 100px;   /* espacio para que el menú fijo no tape el contenido */
-}
-
-.hero-section .container{
-    max-width:1200px;
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:90px;            /* distancia amplia entre texto e imagen */
-}
-
-.hero-section .col{
-    width:50%;
-}
-
-/* TEXTO DE LA PRIMERA SECCIÓN (blanco, sombra) */
-.hero-section h1{
-    font-size:70px;
-    font-weight:600;
-    line-height:1;
-    margin-bottom:30px;
-    color:#ffffff;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    font-family:'Poppins', sans-serif;
-}
-
-.hero-section .button{
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-    padding:18px 35px;
-    background:#8114e1;
-    color:#fff;
-    text-decoration:none;
+    color:#111;
     font-weight:500;
-    border-radius:6px;
-    transition:.3s;
-    font-family:'Poppins', sans-serif;
 }
 
-.hero-section .button:hover{
-    transform:translateY(-2px);
-    background:#784aed;
-}
-
-/* IMAGEN 3D (solo en hero) */
-.hero-section .phone-wrapper{
-    position:relative;
-    height:600px;
-    perspective:1000px;
-    max-width:100%;
-}
-
-.hero-section .phone{
-    width:100%;
-    height:100%;
-    background:url("/Publicidades/publicidad.webp") center/contain no-repeat;
-    position:relative;
-    transform-style:preserve-3d;
-    transition:transform .15s ease-out;
-}
-
-.hero-section .phone::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:url("https://template.makedreamwebsite.com/wp-content/uploads/2022/06/mobile-frame.png") center/contain no-repeat;
-    pointer-events:none;
-}
-
-/* RESPONSIVE SOLO PARA LA SECCIÓN HERO */
-@media(max-width:900px){
-    .hero-section .container{
-        flex-direction:column;
-        gap:0;
-    }
-    .hero-section .col{
-        width:100%;
-    }
-    .hero-section .col:first-child{
-        margin-bottom:70px;
-    }
-    .hero-section h1{
-        font-size:38px;
-        margin-bottom:25px;
-        text-align:center;
-    }
-    .hero-section .button{
-        display:flex;
-        justify-content:center;
-        width:fit-content;
-        margin:0 auto;
-    }
-    .hero-section .phone-wrapper{
-        height:420px;
-        margin-top:10px;
-    }
-}
-
-@media(max-width:480px){
-    .hero-section .col:first-child{
-        margin-bottom:80px;
-    }
-    .hero-section .phone-wrapper{
-        height:380px;
-    }
-    .hero-section h1{
-        font-size:32px;
-    }
-}
-
-@media(min-width:1400px){
-    .hero-section .container{
-        max-width:1300px;
-        gap:120px;
-    }
-    .hero-section .phone-wrapper{
-        height:650px;
-    }
-    .hero-section h1{
-        font-size:80px;
-    }
-}
-
-/* =====================================================
-   ESTILOS PARA SECCIONES ADICIONALES (ejemplo)
-   ===================================================== */
-/* Estas clases no afectan a la primera sección, solo son un ejemplo
-   para que puedas agregar más contenido sin interferencias */
-.section-generica{
-    min-height:100vh;
+/* HERO */
+.hero{
+    height:100vh;
     display:flex;
     align-items:center;
-    justify-content:center;
-    background:#1a1a2e;   /* fondo oscuro de ejemplo */
-    padding:80px 20px;
-    text-align:center;
+    justify-content:space-between;
+    padding:0 80px;
+    background:#f5f5f5;
 }
 
-.section-generica h2{
+.hero img{
+    width:450px;
+}
+
+.hero-text{
+    max-width:500px;
+}
+
+.hero h1{
     font-size:48px;
-    margin-bottom:20px;
+    font-weight:700;
+}
+
+.hero p{
+    margin:20px 0;
+    color:#555;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 20px;
+    background:#111;
     color:#fff;
+    text-decoration:none;
+    font-size:14px;
 }
 
-.section-generica p{
-    font-size:18px;
-    max-width:800px;
-    margin:0 auto;
-    color:#ccc;
+/* DARK SECTION */
+.dark{
+    background:linear-gradient(90deg,#000,#3b0000);
+    color:#fff;
+    padding:80px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
+.dark img{
+    width:400px;
+}
+
+.dark h2{
+    font-size:42px;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    padding:40px;
+}
+
+.grid img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    background:#ddd;
+}
+
+/* FINAL */
+.cta{
+    padding:100px 80px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.cta img{
+    width:400px;
+}
+
+.cta h2{
+    font-size:48px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .hero, .dark, .cta{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     🔽 MENÚ (sin alterar)
-===================================================== -->
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="#" class="logo">Porta<span>folio</span></a>
-        <ul class="nav-menu">
-            <li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Sobre mí</a></li>
-            <li class="nav-item">
-                <a href="#" class="nav-link submenu-toggle">
-                    Proyectos <i class="fas fa-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="#">Ilustración</a></li>
-                    <li><a href="#">Fotografía</a></li>
-                    <li><a href="#">Diseño 3D</a></li>
-                    <li><a href="#">Marcas</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a href="#" class="nav-link">Contacto</a></li>
-        </ul>
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
-        </div>
-    </div>
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Portfolio</a>
+    <a href="#">Contact</a>
 </nav>
 
-<!-- =====================================================
-     🔽 PRIMERA SECCIÓN (con efecto 3D, texto blanco, fondo específico)
-===================================================== -->
-<section class="hero-section">
-    <div class="container">
-        <div class="col">
-            <h1>Transformamos ideas en experiencias visuales</h1>
-            <a href="#" class="button">
-                Ver mas
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="col">
-            <div class="phone-wrapper">
-                <div class="phone"></div>
-            </div>
-        </div>
+<!-- HERO -->
+<section class="hero">
+    <img src="https://via.placeholder.com/400x500" alt="">
+    <div class="hero-text">
+        <h1>Character Design Studio</h1>
+        <p>Browse my gallery of recent freelance projects I did over the last 3 years</p>
+        <a href="#" class="btn">View my work</a>
     </div>
 </section>
 
-<!-- =====================================================
-     🔽 SECCIONES ADICIONALES (sin afectar a la primera)
-     ===================================================== -->
-<section class="section-generica">
+<!-- DARK SECTION -->
+<section class="dark">
+    <img src="https://via.placeholder.com/400x400" alt="">
     <div>
-        <h2>Sección 2: Contenido adicional</h2>
-        <p>Aquí puedes añadir más secciones sin que interfieran con el estilo de la primera. El fondo, los colores y la estructura son completamente independientes.</p>
+        <h2>Check out my work</h2>
+        <p>Browse my gallery of recent freelance projects I did over the last 3 years</p>
+        <br>
+        <a href="#" class="btn">View my work</a>
     </div>
 </section>
 
-<section class="section-generica" style="background:#2c3e50;">
+<!-- GRID -->
+<section class="grid">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+    <img src="https://via.placeholder.com/300">
+</section>
+
+<!-- CTA -->
+<section class="cta">
     <div>
-        <h2>Sección 3: Otra sección</h2>
-        <p>Puedes seguir agregando más bloques, manteniendo el menú funcional y el efecto 3D restringido solo al primer bloque.</p>
+        <h2>Hire me for your project</h2>
+        <br>
+        <a href="#" class="btn">Contact me</a>
     </div>
+    <img src="https://via.placeholder.com/400x400">
 </section>
-
-<script>
-/* =====================================================
-   🔽 JS DEL MENÚ (sin alterar)
-===================================================== */
-const navbar = document.querySelector('.navbar');
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-
-window.addEventListener('scroll',()=>{
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-hamburger.addEventListener('click',()=>{
-    navMenu.classList.toggle('active');
-});
-
-document.querySelectorAll('.submenu-toggle').forEach(toggle=>{
-    toggle.addEventListener('click',e=>{
-        if(window.innerWidth <= 768){
-            e.preventDefault();
-            const submenu = toggle.nextElementSibling;
-            submenu.style.maxHeight
-                ? submenu.style.maxHeight = null
-                : submenu.style.maxHeight = submenu.scrollHeight + "px";
-        }
-    });
-});
-
-/* =====================================================
-   🔽 JS DEL EFECTO 3D (solo para el hero-section)
-===================================================== */
-const heroWrapper = document.querySelector('.hero-section .phone-wrapper');
-const heroPhone = document.querySelector('.hero-section .phone');
-
-if(heroWrapper && heroPhone){
-    heroWrapper.addEventListener('mousemove', (e) => {
-        const rect = heroWrapper.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateY = ((x - centerX) / centerX) * 12;
-        const rotateX = -((y - centerY) / centerY) * 12;
-
-        heroPhone.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    heroWrapper.addEventListener('mouseleave', () => {
-        heroPhone.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    });
-}
-</script>
 
 </body>
 </html>
